@@ -515,24 +515,16 @@ const parseMetadata = (metadata) => {
           height: params.coordSys.height,
         });
       }
-     function getAdjustedTime(dateValue) {
+          function getAdjustedTime(dateValue) {
         let d = new Date(dateValue);
         let hours = d.getHours();
-        hours = hours < 7 ? 0 : Math.abs(7 - hours);
+        hours = hours < 7 ? 0 : Math.abs(7 - hours); // Use a configuration parameter before going live
         let minutes = d.getMinutes();
         let decimalTimeString = (2.66666 * hours + minutes / 60).toFixed();
         var n = new Date(dateValue);
         n.setHours(0, 0, 0, 0);
         n.setSeconds(+decimalTimeString * 60 * 60);
-        
-        let year = n.getFullYear();
-        let month = ('0' + (n.getMonth() + 1)).slice(-2);
-        let day = ('0' + n.getDate()).slice(-2);
-        let hour = ('0' + n.getHours()).slice(-2);
-        let minute = ('0' + n.getMinutes()).slice(-2);
-        let second = ('0' + n.getSeconds()).slice(-2);
-        
-        return `${year}${month}${day}${hour}${minute}${second}`;
+        return n;
       }
       function sameDay(d1, d2) {
         return (
