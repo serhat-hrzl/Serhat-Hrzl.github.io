@@ -78,7 +78,6 @@ const parseMetadata = (metadata) => {
           if (dimension.id.indexOf(substringTIMESTAMP) === -1) {
             rowData.push(row[dimension.key].label);
           } else {
-            var d = new Date(row[dimension.key].id);
             // var d = new Date(row[dimension.key].id); /* INKKASHY - Date will now be a string in yyyymmddhhmmss format */
             var d = yyyymmddhhmmssToDate(row[dimension.key].id);
             var adjustedTime = getAdjustedTime(d);
