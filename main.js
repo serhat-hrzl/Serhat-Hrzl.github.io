@@ -78,7 +78,8 @@ const parseMetadata = (metadata) => {
           if (dimension.id.indexOf(substringTIMESTAMP) === -1) {
             rowData.push(row[dimension.key].label);
           } else {
-            var d = new Date(row[dimension.key].id);
+            // var d = new Date(row[dimension.key].id); /* INKKASHY - Date will now be a string in yyyymmddhhmmss format */
+            var d = yyyymmddhhmmssToDate(row[dimension.key].id);
             var adjustedTime = getAdjustedTime(d);
             rowData.push(adjustedTime);
           }
@@ -515,7 +516,7 @@ const parseMetadata = (metadata) => {
           height: params.coordSys.height,
         });
       }
-          function getAdjustedTime(dateValue) {
+      function getAdjustedTime(dateValue) {
         let d = new Date(dateValue);
         let hours = d.getHours();
         hours = hours < 7 ? 0 : Math.abs(7 - hours); // Use a configuration parameter before going live
@@ -585,6 +586,15 @@ const parseMetadata = (metadata) => {
           offsetDays++;
         } while (offsetDays <= days);
         return weekendMarkArea;
+      }
+      function yyyymmddhhmmssToDate(yyyymmddhhmmss) {
+        const year = parseInt(yyyymmddhhmmss.substring(0, 4));
+        const month = parseInt(yyyymmddhhmmss.substring(4, 6)) - 1;
+        const day = parseInt(yyyymmddhhmmss.substring(6, 8));
+        const hour = parseInt(yyyymmddhhmmss.substring(8, 10));
+        const minute = parseInt(yyyymmddhhmmss.substring(10, 12));
+        const second = parseInt(yyyymmddhhmmss.substring(12, 14));
+        return new Date(year, month, day, hour, minute, second);
       }
     }
   }
