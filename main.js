@@ -410,13 +410,13 @@ const parseMetadata = (metadata) => {
 
         var statusColor;
         switch (api.value(9)) {
-          case "Green":
+          case "GREEN":
             statusColor = "#0e8f33";
             break;
-          case "Red":
+          case "RED":
             statusColor = "#941403";
             break;
-          case "Grey":
+          case "GREY":
             statusColor = "#a3a3a3";
             break;
         }
