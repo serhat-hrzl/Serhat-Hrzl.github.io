@@ -70,7 +70,7 @@ const parseMetadata = (metadata) => {
       aData["dimensions"] = [];
       aData["data"] = [];
 
-      const substringTIMESTAMP = "TIMESTAMP"; // Converting fields to UNIX timestammp which has a substring TIMESTAMP
+      const substringTIMESTAMP = "_TIME"; // Converting fields to UNIX timestammp which has a substring TIMESTAMP
       data.forEach((row, index) => {
         let rowData = [];
         rowData.push(index); // Added INDEX as an identifier
