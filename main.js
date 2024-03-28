@@ -467,7 +467,7 @@ const parseMetadata = (metadata) => {
                 x: 0,
                 y: -20,
                 width: 300,
-                height: 25,
+                height: 28,
                 layout: "cover",
               },
               style: {
@@ -477,8 +477,8 @@ const parseMetadata = (metadata) => {
             {
               type: "text",
               style: {
-                x: 50,
-                y: -5,
+                x: 55,
+                y: -3,
                 text: api.value(1),
                 textVerticalAlign: "bottom",
                 textAlign: "center",
