@@ -153,6 +153,31 @@ const parseMetadata = (metadata) => {
             text: "Order Monitor",
             left: "center",
           },
+          dataZoom: [
+            {
+              type: "slider",
+              yAxisIndex: 0,
+              zoomLock: true,
+              width: 10,
+              right: 10,
+              top: 70,
+              bottom: 20,
+              start: 95,
+              end: 100,
+              handleSize: 0,
+              showDetail: false,
+            },
+            {
+              type: "inside",
+              id: "insideY",
+              yAxisIndex: 0,
+              start: 95,
+              end: 100,
+              zoomOnMouseWheel: false,
+              moveOnMouseMove: true,
+              moveOnMouseWheel: true,
+            },
+          ],
           graphic: {
             elements: [
               {
@@ -481,7 +506,7 @@ const parseMetadata = (metadata) => {
                 y: -3,
                 text: api.value(1),
                 textVerticalAlign: "bottom",
-                textAlign: "center",
+                textAlign: "left",
                 textFill: "#fff",
               },
             },
