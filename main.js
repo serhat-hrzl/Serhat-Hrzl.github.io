@@ -355,7 +355,7 @@ const parseMetadata = (metadata) => {
               dimensions: _rawData.data,
               encode: {
                 x: -1,
-                y: [DIM_TITLE],
+                y: 0,
               },
               data: _rawData.data,
             },
