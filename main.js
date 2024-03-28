@@ -116,8 +116,8 @@ const parseMetadata = (metadata) => {
       myChart.setOption((option = generateOptions()));
 
       function generateOptions() {
-        //var markline = getAdjustedTime(new Date()); // This sets the current time vertical line 
-        var markline = _rawData.data[0][11]
+        //var markline = getAdjustedTime(new Date()); // This sets the current time vertical line
+        var markline = _rawData.data[0][10];
         var currentDate = new Date();
         if (!sameDay(markline, currentDate)) {
           markline.setDate(markline.getDate() - 1);
