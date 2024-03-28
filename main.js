@@ -177,7 +177,7 @@ const parseMetadata = (metadata) => {
               },
               {
                 type: "group",
-                left: 105,
+                left: 205,
                 top: 60,
                 children: [
                   {
@@ -197,7 +197,7 @@ const parseMetadata = (metadata) => {
               },
               {
                 type: "group",
-                left: 125,
+                left: 225,
                 top: "50",
                 children: [
                   {
@@ -217,7 +217,7 @@ const parseMetadata = (metadata) => {
               },
               {
                 type: "group",
-                left: 230,
+                left: 330,
                 top: 60,
                 children: [
                   {
@@ -237,7 +237,7 @@ const parseMetadata = (metadata) => {
               },
               {
                 type: "group",
-                left: 250,
+                left: 350,
                 top: "50",
                 children: [
                   {
@@ -261,7 +261,7 @@ const parseMetadata = (metadata) => {
             show: true,
             top: 70,
             bottom: 70,
-            left: 370,
+            left: 470,
             right: 20,
             backgroundColor: "#fff",
             borderWidth: 0,
@@ -466,7 +466,7 @@ const parseMetadata = (metadata) => {
                 d: "M 0 0 L 0 -20 L 30 -20 C 34 -20 30 -20 34 -20 L 34 0 L 70 0 Z",
                 x: 0,
                 y: -20,
-                width: 200,
+                width: 300,
                 height: 25,
                 layout: "cover",
               },
@@ -477,7 +477,7 @@ const parseMetadata = (metadata) => {
             {
               type: "text",
               style: {
-                x: 50,
+                x: 150,
                 y: -3,
                 text: api.value(1),
                 textVerticalAlign: "bottom",
@@ -488,7 +488,7 @@ const parseMetadata = (metadata) => {
             {
               type: "text",
               style: {
-                x: 150,
+                x: 250,
                 y: -3,
                 text: api.value(5) + " mins",
                 textVerticalAlign: "bottom",
@@ -498,7 +498,7 @@ const parseMetadata = (metadata) => {
             {
               type: "text",
               style: {
-                x: 275,
+                x: 375,
                 y: -3,
                 text: api.value(8) + " mins",
                 textVerticalAlign: "bottom",
