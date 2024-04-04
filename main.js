@@ -417,7 +417,7 @@ const parseMetadata = (metadata) => {
         var barDescriptionWidth =
           echarts.format.getTextRect(barDescription).width;
         var text =
-          barLength > barDescriptionWidth + 20 && x + barLength >= 50
+          barLength > barDescriptionWidth + 40 && x + barLength >= 100
             ? barDescription
             : "";
         var rectNormal = overLap(params, {
@@ -509,11 +509,11 @@ const parseMetadata = (metadata) => {
             {
               type: "text",
               style: {
-                x: 10,
+                x: 50,
                 y: -3,
                 text: api.value(1),
                 textVerticalAlign: "bottom",
-                textAlign: "center",
+                textAlign: "left",
                 //textFill: "#fff",
               },
             },
