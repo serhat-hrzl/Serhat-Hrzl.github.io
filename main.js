@@ -189,7 +189,7 @@ const parseMetadata = (metadata) => {
             elements: [
               {
                 type: "group",
-                left: 50,
+                left: 120,
                 top: "50",
                 children: [
                   {
