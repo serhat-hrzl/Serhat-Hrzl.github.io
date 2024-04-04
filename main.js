@@ -189,7 +189,7 @@ const parseMetadata = (metadata) => {
             elements: [
               {
                 type: "group",
-                left: 50,
+                left: 120,
                 top: "50",
                 children: [
                   {
@@ -413,7 +413,7 @@ const parseMetadata = (metadata) => {
         var barHeight = 30;
         var x = timestampStart[0];
         var y = timestampStart[1] - barHeight;
-        var barDescription = api.value(4) + "";
+        var barDescription = "Work Center: " + api.value(4);
         var barDescriptionWidth =
           echarts.format.getTextRect(barDescription).width;
         var text = barLength > barDescriptionWidth + 30 ? barDescription : "";
@@ -436,6 +436,10 @@ const parseMetadata = (metadata) => {
           width: barLength,
           height: barHeight,
         });
+
+        console.log(
+          "x: " + x + " / width: " + barLength + " / Order: " + api.value(1)
+        );
 
         var statusColor;
         switch (api.value(9)) {
