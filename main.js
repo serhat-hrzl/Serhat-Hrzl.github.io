@@ -1,4 +1,4 @@
-// Loads the required libraries / scripts synchronously and waits for the promise
+// Load the required libraries & scripts synchronously and wait for the promise
 var getScriptPromisify = (src) => {
   return new Promise((resolve) => {
     $.getScript(src, resolve);
@@ -147,6 +147,7 @@ const parseMetadata = (metadata) => {
 
         return {
           tooltip: {
+            show: false,
             // trigger: "item",
             // axisPointer: {
             //   type: "shadow",
