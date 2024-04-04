@@ -27,7 +27,7 @@ const parseMetadata = (metadata) => {
   const prepared = document.createElement("template");
   prepared.innerHTML = `
                         <style></style>
-                        <div id="root" style="width: 100%;"></div>
+                        <div id="root" style="width: 100%; height: 100%;"></div>
                       `;
   class generateGanttChart extends HTMLElement {
     constructor() {
@@ -162,29 +162,19 @@ const parseMetadata = (metadata) => {
           //   left: "center",
           // },
           dataZoom: [
-            // {
-            //   type: "slider",
-            //   yAxisIndex: 0,
-            //   zoomLock: true,
-            //   width: 10,
-            //   right: 10,
-            //   top: 70,
-            //   bottom: 20,
-            //   start: 95,
-            //   end: 100,
-            //   handleSize: 0,
-            //   showDetail: false,
-            // },
-            // {
-            //   type: "inside",
-            //   id: "insideY",
-            //   yAxisIndex: 0,
-            //   start: 95,
-            //   end: 100,
-            //   zoomOnMouseWheel: false,
-            //   moveOnMouseMove: true,
-            //   moveOnMouseWheel: true,
-            // },
+            {
+              type: "slider",
+              yAxisIndex: 0,
+              zoomLock: true,
+              width: 10,
+              right: 10,
+              top: 70,
+              bottom: 20,
+              handleSize: 0,
+              showDetail: false,
+              filterMode: "weakFilter",
+              maxValueSpan: 15,
+            },
           ],
           graphic: {
             elements: [
