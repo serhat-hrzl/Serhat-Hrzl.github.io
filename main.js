@@ -189,7 +189,7 @@ const parseMetadata = (metadata) => {
             elements: [
               {
                 type: "group",
-                left: 20,
+                left: 50,
                 top: "50",
                 children: [
                   {
@@ -511,7 +511,7 @@ const parseMetadata = (metadata) => {
                 text: api.value(1),
                 textVerticalAlign: "bottom",
                 textAlign: "left",
-                font: "Medium 14px Microsoft YaHei",
+                font: "bolder 14px Microsoft YaHei",
               },
             },
             {
