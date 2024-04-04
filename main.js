@@ -98,6 +98,12 @@ const parseMetadata = (metadata) => {
         aData["dimensions"].push(measure.id);
       });
 
+      aData.data.sort(function (a, b) {
+        return (
+          b[3].getTime() - a[3].getTime() || b[2].getTime() - a[2].getTime()
+        );
+      });
+
       console.log(aData);
 
       /*-------------------------------------Chart related customizations---------------------------------------*/
@@ -128,25 +134,24 @@ const parseMetadata = (metadata) => {
 
         return {
           tooltip: {
-            trigger: "item",
-            axisPointer: {
-              type: "shadow",
-            },
-            formatter: function (params) {
-              var startDateTime = echarts.format.formatTime(
-                "dd-MM-yyyy hh:mm",
-                params.data[2]
-              );
-              var endDateTime = echarts.format.formatTime(
-                "dd-MM-yyyy hh:mm",
-                params.data[3]
-              );
-
-              var line1 = `<span style="border-left: 2px solid #fff;display: inline-block;height: 12px;margin-right: 5px;">Start Date </span>`;
-              var line2 = `</br><span style="border-left: 2px solid #fff;display: inline-block;height: 12px;margin-right: 5px;">End Date </span>`;
-              return `${line1} ${startDateTime}
-                        ${line2} ${endDateTime}`;
-            },
+            // trigger: "item",
+            // axisPointer: {
+            //   type: "shadow",
+            // },
+            // formatter: function (params) {
+            //   var startDateTime = echarts.format.formatTime(
+            //     "dd-MM-yyyy hh:mm",
+            //     params.data[2]
+            //   );
+            //   var endDateTime = echarts.format.formatTime(
+            //     "dd-MM-yyyy hh:mm",
+            //     params.data[3]
+            //   );
+            //   var line1 = `<span style="border-left: 2px solid #fff;display: inline-block;height: 12px;margin-right: 5px;">Start Date </span>`;
+            //   var line2 = `</br><span style="border-left: 2px solid #fff;display: inline-block;height: 12px;margin-right: 5px;">End Date </span>`;
+            //   return `${line1} ${startDateTime}
+            //             ${line2} ${endDateTime}`;
+            // },
           },
           animation: true,
           title: {
