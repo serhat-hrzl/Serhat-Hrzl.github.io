@@ -432,8 +432,8 @@ const parseMetadata = (metadata) => {
         });
 
         var xText = x;
-        if (x < 0 && timestampEnd[0] > barDescriptionWidth + 20) {
-          xText = 10;
+        if (x < 0 && timestampEnd[0] > barDescriptionWidth) {
+          xText = timestampEnd[0] - (barDescriptionWidth + 20);
         }
 
         var rectText = overLap(params, {
