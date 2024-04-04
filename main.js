@@ -431,29 +431,15 @@ const parseMetadata = (metadata) => {
           height: barHeight,
         });
 
-        var xText = x;
-        var barLengthText = barLength;
-        if (x < 0 && timestampEnd[0] > barDescriptionWidth) {
-          xText = timestampEnd[0] - (barDescriptionWidth + 20);
-          barLengthText = barDescriptionWidth;
-        }
-
         var rectText = overLap(params, {
-          x: xText,
+          x: x,
           y: y,
-          width: barLengthText,
+          width: barLength,
           height: barHeight,
         });
 
         console.log(
-          "x: " +
-            x +
-            " / timestampEnd[0]: " +
-            timestampEnd[0] +
-            " / barLengthText: " +
-            barLengthText +
-            " /xText: " +
-            xText
+          "x: " + x + " / width: " + barLength + " / Order: " + api.value(1)
         );
 
         var statusColor;
