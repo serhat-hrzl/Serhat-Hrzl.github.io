@@ -417,7 +417,7 @@ const parseMetadata = (metadata) => {
         var barDescriptionWidth =
           echarts.format.getTextRect(barDescription).width;
         var text =
-          barLength > barDescriptionWidth + 40 && x + barLength >= 100
+          barLength > barDescriptionWidth + 20 && x + barLength >= 50
             ? barDescription
             : "";
         var rectNormal = overLap(params, {
@@ -492,20 +492,20 @@ const parseMetadata = (metadata) => {
           type: "group",
           position: [0, y],
           children: [
-            {
-              type: "path",
-              shape: {
-                d: "M 0 0 L 0 -20 L 30 -20 C 34 -20 30 -20 34 -20 L 34 0 L 70 0 Z",
-                x: 0,
-                y: -20,
-                width: 350,
-                height: 23,
-                layout: "cover",
-              },
-              style: {
-                fill: "black",
-              },
-            },
+            // {
+            //   type: "path",
+            //   shape: {
+            //     d: "M 0 0 L 0 -20 L 30 -20 C 34 -20 30 -20 34 -20 L 34 0 L 70 0 Z",
+            //     x: 0,
+            //     y: -20,
+            //     width: 350,
+            //     height: 23,
+            //     layout: "cover",
+            //   },
+            //   style: {
+            //     fill: "black",
+            //   },
+            // },
             {
               type: "text",
               style: {
@@ -513,8 +513,8 @@ const parseMetadata = (metadata) => {
                 y: -3,
                 text: api.value(1),
                 textVerticalAlign: "bottom",
-                textAlign: "left",
-                textFill: "#fff",
+                textAlign: "center",
+                //textFill: "#fff",
               },
             },
             {
