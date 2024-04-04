@@ -119,6 +119,7 @@ const parseMetadata = (metadata) => {
       var DIM_TIME_START = 2;
       var DIM_TIME_END = 3;
       var DIM_TIME_PROGRESS = 6;
+      var maximumValueSpan = 15;
       var _rawData;
 
       _rawData = aData;
@@ -127,6 +128,15 @@ const parseMetadata = (metadata) => {
       function generateOptions() {
         //var markline = getAdjustedTime(new Date()); // This sets the current time vertical line
         var markline = _rawData.data[0][10];
+
+        var axisStartValue =
+          _rawData.data.length < maximumValueSpan
+            ? 0
+            : _rawData.data.length - maximumValueSpan;
+        var axisEndValue =
+          _rawData.data.length < maximumValueSpan
+            ? maximumValueSpan
+            : _rawData.data.length;
         var currentDate = new Date();
         if (!sameDay(markline, currentDate)) {
           markline.setDate(markline.getDate() - 1);
@@ -156,11 +166,7 @@ const parseMetadata = (metadata) => {
             //             ${line2} ${endDateTime}`;
             // },
           },
-          animation: true,
-          // title: {
-          //   text: "Order Monitor",
-          //   left: "center",
-          // },
+          animation: false,
           dataZoom: [
             {
               type: "slider",
@@ -173,7 +179,9 @@ const parseMetadata = (metadata) => {
               handleSize: 0,
               showDetail: false,
               filterMode: "weakFilter",
-              maxValueSpan: 15,
+              maxValueSpan: maximumValueSpan,
+              startValue: axisStartValue,
+              endValue: axisEndValue,
             },
           ],
           graphic: {
