@@ -27,7 +27,7 @@ const parseMetadata = (metadata) => {
   const prepared = document.createElement("template");
   prepared.innerHTML = `
                         <style></style>
-                        <div id="root" style="width: 100%; height: 100%;"></div>
+                        <div id="root" style="width: 100%;"></div>
                       `;
   class generateGanttChart extends HTMLElement {
     constructor() {
@@ -157,10 +157,10 @@ const parseMetadata = (metadata) => {
             // },
           },
           animation: true,
-          title: {
-            text: "Order Monitor",
-            left: "center",
-          },
+          // title: {
+          //   text: "Order Monitor",
+          //   left: "center",
+          // },
           dataZoom: [
             // {
             //   type: "slider",
