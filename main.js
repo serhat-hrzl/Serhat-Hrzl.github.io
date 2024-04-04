@@ -104,6 +104,9 @@ const parseMetadata = (metadata) => {
         );
       });
 
+      aData.forEach((row, index) => {
+        row[0] = index;
+      });
       console.log(aData);
 
       /*-------------------------------------Chart related customizations---------------------------------------*/
