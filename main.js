@@ -509,7 +509,7 @@ const parseMetadata = (metadata) => {
               style: {
                 x: 50,
                 y: -3,
-                text: api.value(1) + "",
+                text: api.value(1) + " ",
                 textVerticalAlign: "bottom",
                 textAlign: "left",
                 font: "bolder 14px Microsoft YaHei",
