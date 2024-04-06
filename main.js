@@ -70,15 +70,14 @@ const parseMetadata = (metadata) => {
       aData["dimensions"] = [];
       aData["data"] = [];
 
-      const substringTIMESTAMP = "_TIME"; // Converting fields to UNIX timestammp which has a substring TIMESTAMP
+      const substringTIMESTAMP = "_TIMESTAMP"; // Converting datetime fields to UNIX timestammp which has a substring TIMESTAMP
       data.forEach((row, index) => {
         let rowData = [];
-        rowData.push(index); // Added INDEX as an identifier
+        rowData.push(index); // Added loop index as an identifier
         dimensions.forEach((dimension) => {
           if (dimension.id.indexOf(substringTIMESTAMP) === -1) {
             rowData.push(row[dimension.key].label);
           } else {
-            // var d = new Date(row[dimension.key].id); /* INKKASHY - Date will now be a string in yyyymmddhhmmss format */
             var d = yyyymmddhhmmssToDate(row[dimension.key].id);
             var adjustedTime = getAdjustedTime(d);
             rowData.push(adjustedTime);
@@ -97,7 +96,8 @@ const parseMetadata = (metadata) => {
       measures.forEach((measure) => {
         aData["dimensions"].push(measure.id);
       });
-
+/* Sort the result set in descending order. The graph is plotted from bottom to top, hence sorting the data in descending order
+ to make it appear in ascending when it is rendered */
       aData.data.sort(function (a, b) {
         return (
           b[3].getTime() - a[3].getTime() || b[2].getTime() - a[2].getTime()
@@ -114,11 +114,10 @@ const parseMetadata = (metadata) => {
       const myChart = echarts.init(this._root, "main");
       let option;
 
-      var DIM_CATEGORY_INDEX = 0;
-      var DIM_TITLE = 1;
-      var DIM_TIME_START = 2;
-      var DIM_TIME_END = 3;
-      var DIM_TIME_PROGRESS = 6;
+      var DIM_CATEGORY_INDEX = 0; //Index field used as an internal identifier
+      var DIM_TIME_START = 2; // Index of the field which has the planned start timestamp
+      var DIM_TIME_END = 3; // Index of the field which has the planned end timestamp
+      var DIM_TIME_PROGRESS = 6; // Index of the field which depicts Absolute Progress Timestamp
       var maximumValueSpan = 15;
       var _rawData;
 
@@ -126,9 +125,7 @@ const parseMetadata = (metadata) => {
       myChart.setOption((option = generateOptions()));
 
       function generateOptions() {
-        //var markline = getAdjustedTime(new Date()); // This sets the current time vertical line
-        var markline = _rawData.data[0][10];
-
+        var markline = _rawData.data[0][10]; // Now Timestamp Markline
         var axisStartValue =
           _rawData.data.length < maximumValueSpan
             ? 0
@@ -148,6 +145,7 @@ const parseMetadata = (metadata) => {
         return {
           tooltip: {
             show: false,
+            /* Commenting the code below as this feature will be shipped with v2 */
             // trigger: "item",
             // axisPointer: {
             //   type: "shadow",
@@ -512,7 +510,7 @@ const parseMetadata = (metadata) => {
                 text: api.value(1) + " ",
                 textVerticalAlign: "bottom",
                 textAlign: "left",
-                font: "bolder 14px Microsoft YaHei",
+                font: "bolder 12px Microsoft YaHei",
               },
             },
             {
