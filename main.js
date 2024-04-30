@@ -309,7 +309,13 @@ const parseMetadata = (metadata) => {
             position: "top",
             min: function (value) {
               let d = new Date();
-              d.setDate(d.getDate() - 1);
+              if(d.getDay() === 1) {
+              d.setDate(d.getDate() - 5);
+              } else if(d.getDay() === 2){
+              d.setDate(d.getDate() - 5);
+              } else if(d.getDay() === 3){
+              d.setDate(d.getDate() - 5);
+              } else { d.setDate(d.getDate() - 3); }
               d.setHours(0, 0, 0, 0);
               return d;
             },
