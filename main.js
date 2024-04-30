@@ -115,9 +115,17 @@ const parseMetadata = (metadata) => {
       let option;
 
       var DIM_CATEGORY_INDEX = 0; //Index field used as an internal identifier
-      var DIM_TIME_START = 2; // Index of the field which has the planned start timestamp
-      var DIM_TIME_END = 3; // Index of the field which has the planned end timestamp
-      var DIM_TIME_PROGRESS = 6; // Index of the field which depicts Absolute Progress Timestamp
+      var DIM_ORDER_NUMBER = 1; // Order Number
+      var DIM_TIME_START = 2; // Planned Start Timestamp
+      var DIM_TIME_END = 3; // Planned End Timestamp
+      var DIM_WORKCENTER = 4; // WorkCenter
+      var DIM_CURRENT_ACTIVITY_TIME = 5; // Time in Current Activity
+      var DIM_TIME_PROGRESS = 6; // Absolute Progress Timestamp
+      var DIM_BUFFER = 8; // Buffer Time
+      var DIM_COLOR = 9; // Status Color
+      var DIM_NOW_TIMESTAMP = 10; // Now Time Stamp used for the Markline
+      
+
       var maximumValueSpan = 15;
       var _rawData;
 
