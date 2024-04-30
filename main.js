@@ -425,7 +425,7 @@ const parseMetadata = (metadata) => {
         var barHeight = 30;
         var x = timestampStart[0];
         var y = timestampStart[1] - barHeight;
-        var barDescription = api.value(4) + " ";
+        var barDescription = api.value(4) + " .";
         var barDescriptionWidth =
           echarts.format.getTextRect(barDescription).width;
         var text = barLength > barDescriptionWidth + 30 ? barDescription : "";
