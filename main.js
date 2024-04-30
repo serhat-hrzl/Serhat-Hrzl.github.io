@@ -359,7 +359,8 @@ const parseMetadata = (metadata) => {
               id: "orderData",
               type: "custom",
               renderItem: renderBar,
-              dimensions: _rawData.data,
+              dimensions:[null,null,null,null,{type:'ordinal'},null,null,null,null,null,null,null],
+          //    dimensions: _rawData.data,
               encode: {
                 x: [DIM_TIME_START, DIM_TIME_END],
                 y: DIM_CATEGORY_INDEX,
