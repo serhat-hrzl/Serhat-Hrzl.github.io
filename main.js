@@ -639,7 +639,7 @@ const parseMetadata = (metadata) => {
 
      function  getholidays(dateValue) {
        var n = new Date(dateValue);
-     return n;
+     return holidayArea;
      }
       
       
