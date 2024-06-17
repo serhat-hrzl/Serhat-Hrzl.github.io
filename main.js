@@ -634,7 +634,10 @@ const parseMetadata = (metadata) => {
         return weekendMarkArea;
       }
 
-
+function getholidays(days) {
+  
+                   }
+      
       
       function yyyymmddhhmmssToDate(yyyymmddhhmmss) {
         const year = parseInt(yyyymmddhhmmss.substring(0, 4));
