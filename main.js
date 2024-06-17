@@ -151,7 +151,7 @@ const parseMetadata = (metadata) => {
 
         var weekendMarkArea = getUpcomingWeekends(10);
 
-        var holidayArea = getholidays(11);
+     //   var holidayArea = getholidays(11);
 
         return {
           tooltip: {
