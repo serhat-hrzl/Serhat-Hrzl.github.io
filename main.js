@@ -636,9 +636,9 @@ const parseMetadata = (metadata) => {
 
 
         function getholidays(days) {
-           var weekendMarkArea = [];
+           var Holidayarea = [];
 
-          return weekendMarkArea;
+          return HolidayMarkArea;
         }
 
       
