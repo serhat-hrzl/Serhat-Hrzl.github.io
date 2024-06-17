@@ -630,11 +630,18 @@ const parseMetadata = (metadata) => {
           }
           offsetDays++;
         } while (offsetDays <= days);
-
-        var holiday = api.value(DIM_DATE);
         
         return weekendMarkArea;
       }
+
+
+        function getholidays(days) {
+           var weekendMarkArea = [];
+
+          return weekendMarkArea;
+        }
+
+      
       function yyyymmddhhmmssToDate(yyyymmddhhmmss) {
         const year = parseInt(yyyymmddhhmmss.substring(0, 4));
         const month = parseInt(yyyymmddhhmmss.substring(4, 6)) - 1;
