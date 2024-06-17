@@ -635,7 +635,7 @@ const parseMetadata = (metadata) => {
       }
 
 function getholidays(days) {
-  
+   var holiday = api.value(DIM_DATE)
                    }
       
       
