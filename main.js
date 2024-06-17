@@ -635,6 +635,10 @@ const parseMetadata = (metadata) => {
       }
 
       
+function getholidays(days) {
+   var holiday = api.value(DIM_DATE)
+                   }
+      
       
       function yyyymmddhhmmssToDate(yyyymmddhhmmss) {
         const year = parseInt(yyyymmddhhmmss.substring(0, 4));
