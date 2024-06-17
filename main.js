@@ -634,9 +634,6 @@ const parseMetadata = (metadata) => {
         return weekendMarkArea;
       }
 
-function getholidays(days) {
-   var holiday = api.value(DIM_DATE)
-                   }
       
       
       function yyyymmddhhmmssToDate(yyyymmddhhmmss) {
