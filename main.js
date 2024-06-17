@@ -151,6 +151,8 @@ const parseMetadata = (metadata) => {
 
         var weekendMarkArea = getUpcomingWeekends(10);
 
+        var holidayMarkArea = getholidays(11);
+
         return {
           tooltip: {
             show: false,
@@ -586,6 +588,7 @@ const parseMetadata = (metadata) => {
           var day = new Date();
           day = new Date(day.setDate(day.getDate() + offsetDays));
           if (day.getDay() === 6) {
+           // var sat = [];
             var sat = [];
             var sun = [];
             var [sunTo, sunFrom, satTo, satFrom] = [
@@ -634,10 +637,9 @@ const parseMetadata = (metadata) => {
         return weekendMarkArea;
       }
 
-      
-function getholidays(date) {
-   var holiday = api.value(DIM_DATE)
-                   }
+     function  getholidays(dateValue);{
+       var n = new Date(dateValue);
+     return n}
       
       
       function yyyymmddhhmmssToDate(yyyymmddhhmmss) {
