@@ -151,7 +151,7 @@ const parseMetadata = (metadata) => {
 
         var weekendMarkArea = getUpcomingWeekends(10);
 
-        var holidayArea = getholidays(16);
+       
 
         return {
           tooltip: {
@@ -583,14 +583,14 @@ const parseMetadata = (metadata) => {
       }
       function getUpcomingWeekends(days) {
         var weekendMarkArea = [];
-      //  var offsetDays = -1 * days;
-     //  do {
-        //  var day = new Date();
-          var day = _rawData.data[0][11];
-       //   day = new Date(day.setDate(day.getDate() + offsetDays));
-            day = new Date(day.setDate(day.getDate()));
-      //    if (day.getDay() === 6) {
-           // var sat = [];
+       var offsetDays = -1 * days;
+      do {
+         var day = new Date();
+        
+         day = new Date(day.setDate(day.getDate() + offsetDays));
+          
+          if (day.getDay() === 6) {
+          
             var sat = [];
             var sun = [];
             var [sunTo, sunFrom, satTo, satFrom] = [
@@ -599,24 +599,20 @@ const parseMetadata = (metadata) => {
               new Date(),
               new Date(),
             ];
-          //  satFrom = new Date(satFrom.setDate(satFrom.getDate() + offsetDays));
-          //  satFrom = new Date(satFrom.setHours(0, 0, 0));
+           satFrom = new Date(satFrom.setDate(satFrom.getDate() + offsetDays));
+           satFrom = new Date(satFrom.setHours(0, 0, 0));
 
-            satFrom = new Date(day.setDate(day.getDate()));
-            satFrom = new Date(satFrom.setHours(0, 0, 0));
+           satTo = new Date(satTo.setDate(satTo.getDate() + offsetDays));
+           satTo = new Date(satTo.setHours(23, 59, 59));
 
-        //    satTo = new Date(satTo.setDate(satTo.getDate() + offsetDays));
-        //    satTo = new Date(satTo.setHours(23, 59, 59));
+          
+           sunFrom = new Date(
+           sunFrom.setDate(sunFrom.getDate() + 1 + offsetDays)
+            );
+           sunFrom = new Date(sunFrom.setHours(0, 0, 0));
 
-            satTo = _rawData.data[0][11];
-            satTo = satTo.setHours(0, 0, 0);
-      //      sunFrom = new Date(
-        //      sunFrom.setDate(sunFrom.getDate() + 1 + offsetDays)
-          //  );
-          //  sunFrom = new Date(sunFrom.setHours(0, 0, 0));
-
-          //  sunTo = new Date(sunTo.setDate(sunTo.getDate() + 1 + offsetDays));
-          //  sunTo = new Date(sunTo.setHours(23, 59, 59));
+           sunTo = new Date(sunTo.setDate(sunTo.getDate() + 1 + offsetDays));
+           sunTo = new Date(sunTo.setHours(23, 59, 59));
 
             sat.push(
               {
@@ -628,18 +624,18 @@ const parseMetadata = (metadata) => {
             );
             weekendMarkArea.push(sat);
 
-      //      sun.push(
-      //        {
-         //       xAxis: sunFrom,
-        //      },
-        //      {
-        //        xAxis: sunTo,
-        //      }
-      //      );
-        //    weekendMarkArea.push(sun);
-        //  }
-       //   offsetDays++;
-     //   } while (offsetDays <= days);
+            sun.push(
+              {
+             xAxis: sunFrom,
+            },
+            {
+              xAxis: sunTo,
+            }
+            );
+           weekendMarkArea.push(sun);
+         }
+         offsetDays++;
+        } while (offsetDays <= days);
         
         return weekendMarkArea;
       }
