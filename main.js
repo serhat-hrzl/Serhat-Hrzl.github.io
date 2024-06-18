@@ -636,6 +636,32 @@ const parseMetadata = (metadata) => {
          }
          offsetDays++;
         } while (offsetDays <= days);
+
+
+       var day = _rawData.data[0][11];
+       day = new Date(day.setDate(day.getDate()));
+
+       var holiday = [];
+       var [holidayTo, holidayFrom] = [
+              new Date(),
+              new Date(),
+        
+       holidayFrom = new Date(day.setDate(day.getDate()));
+       holidayFrom = new Date(holidayFrom.setHours(0, 0, 0));
+
+       holidayTo = new Date(day.setDate(day.getDate()));
+       holidayTo = new Date(holidayTo.setHours(0, 0, 0));
+
+         holiday.push(
+              {
+                xAxis: holidayFrom,
+              },
+              {
+                xAxis: holidayTo,
+              }
+            );
+            weekendMarkArea.push(holiday);
+
         
         return weekendMarkArea;
       }
