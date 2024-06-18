@@ -604,16 +604,17 @@ const parseMetadata = (metadata) => {
             satFrom = _rawData.data[0][11];
           //  satFrom = new Date(satFrom.setHours(0, 0, 0));
 
-            satTo = new Date(satTo.setDate(satTo.getDate() + offsetDays));
-            satTo = new Date(satTo.setHours(23, 59, 59));
+        //    satTo = new Date(satTo.setDate(satTo.getDate() + offsetDays));
+        //    satTo = new Date(satTo.setHours(23, 59, 59));
 
-            sunFrom = new Date(
-              sunFrom.setDate(sunFrom.getDate() + 1 + offsetDays)
-            );
-            sunFrom = new Date(sunFrom.setHours(0, 0, 0));
+            satTo = _rawData.data[0][11];
+      //      sunFrom = new Date(
+        //      sunFrom.setDate(sunFrom.getDate() + 1 + offsetDays)
+          //  );
+          //  sunFrom = new Date(sunFrom.setHours(0, 0, 0));
 
-            sunTo = new Date(sunTo.setDate(sunTo.getDate() + 1 + offsetDays));
-            sunTo = new Date(sunTo.setHours(23, 59, 59));
+          //  sunTo = new Date(sunTo.setDate(sunTo.getDate() + 1 + offsetDays));
+          //  sunTo = new Date(sunTo.setHours(23, 59, 59));
 
             sat.push(
               {
@@ -625,15 +626,15 @@ const parseMetadata = (metadata) => {
             );
             weekendMarkArea.push(sat);
 
-            sun.push(
-              {
-                xAxis: sunFrom,
-              },
-              {
-                xAxis: sunTo,
-              }
-            );
-            weekendMarkArea.push(sun);
+      //      sun.push(
+      //        {
+         //       xAxis: sunFrom,
+        //      },
+        //      {
+        //        xAxis: sunTo,
+        //      }
+      //      );
+        //    weekendMarkArea.push(sun);
         //  }
        //   offsetDays++;
      //   } while (offsetDays <= days);
