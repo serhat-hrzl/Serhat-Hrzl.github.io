@@ -603,7 +603,7 @@ const parseMetadata = (metadata) => {
           //  satFrom = new Date(satFrom.setHours(0, 0, 0));
 
             satFrom = new Date(day.setDate(day.getDate()));
-            satFrom = satFrom.setHours(0, 0, 0);
+            satFrom = new Date(satFrom.setHours(0, 0, 0));
 
         //    satTo = new Date(satTo.setDate(satTo.getDate() + offsetDays));
         //    satTo = new Date(satTo.setHours(23, 59, 59));
