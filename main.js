@@ -645,7 +645,7 @@ const parseMetadata = (metadata) => {
        var [holidayTo, holidayFrom] = [
               new Date(),
               new Date(),
-        
+        ];
        holidayFrom = new Date(day.setDate(day.getDate()));
        holidayFrom = new Date(holidayFrom.setHours(0, 0, 0));
 
