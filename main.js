@@ -602,12 +602,13 @@ const parseMetadata = (metadata) => {
           //  satFrom = new Date(satFrom.setHours(0, 0, 0));
 
             satFrom = _rawData.data[0][11];
-          //  satFrom = new Date(satFrom.setHours(0, 0, 0));
+            satFrom = satFrom.setHours(0, 0, 0);
 
         //    satTo = new Date(satTo.setDate(satTo.getDate() + offsetDays));
         //    satTo = new Date(satTo.setHours(23, 59, 59));
 
             satTo = _rawData.data[0][11];
+            satTo = satTo.setHours(0, 0, 0);
       //      sunFrom = new Date(
         //      sunFrom.setDate(sunFrom.getDate() + 1 + offsetDays)
           //  );
