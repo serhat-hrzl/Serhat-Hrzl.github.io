@@ -583,11 +583,11 @@ const parseMetadata = (metadata) => {
       }
       function getUpcomingWeekends(days) {
         var weekendMarkArea = [];
-        var offsetDays = -1 * days;
-        do {
+      //  var offsetDays = -1 * days;
+       do {
         //  var day = new Date();
           var day = _rawData.data[0][11];
-          day = new Date(day.setDate(day.getDate() + offsetDays));
+       //   day = new Date(day.setDate(day.getDate() + offsetDays));
           if (day.getDay() === 6) {
            // var sat = [];
             var sat = [];
