@@ -586,7 +586,7 @@ const parseMetadata = (metadata) => {
         var offsetDays = -1 * days;
         do {
         //  var day = new Date();
-          var day = _rawData.data[0][16];
+          var day = _rawData.data[0][10];
           day = new Date(day.setDate(day.getDate() + offsetDays));
           if (day.getDay() === 6) {
            // var sat = [];
