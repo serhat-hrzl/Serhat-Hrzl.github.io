@@ -124,7 +124,7 @@ const parseMetadata = (metadata) => {
       var DIM_BUFFER = 8; // Buffer Time
       var DIM_COLOR = 9; // Status Color
       var DIM_NOW_TIMESTAMP = 10; // Now Time Stamp used for the Markline
-      var DIM_AS_TIMESTAMP = 16; // Date Test
+      var DIM_AS_TIMESTAMP = 11; // Date Test
       
 
       var maximumValueSpan = 15;
@@ -586,7 +586,7 @@ const parseMetadata = (metadata) => {
         var offsetDays = -1 * days;
         do {
         //  var day = new Date();
-          var day = _rawData.data[0][10];
+          var day = _rawData.data[0][11];
           day = new Date(day.setDate(day.getDate() + offsetDays));
           if (day.getDay() === 6) {
            // var sat = [];
