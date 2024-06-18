@@ -584,11 +584,11 @@ const parseMetadata = (metadata) => {
       function getUpcomingWeekends(days) {
         var weekendMarkArea = [];
       //  var offsetDays = -1 * days;
-       do {
+     //  do {
         //  var day = new Date();
           var day = _rawData.data[0][11];
        //   day = new Date(day.setDate(day.getDate() + offsetDays));
-          if (day.getDay() === 6) {
+      //    if (day.getDay() === 6) {
            // var sat = [];
             var sat = [];
             var sun = [];
@@ -631,17 +631,14 @@ const parseMetadata = (metadata) => {
               }
             );
             weekendMarkArea.push(sun);
-          }
-          offsetDays++;
-        } while (offsetDays <= days);
+        //  }
+       //   offsetDays++;
+     //   } while (offsetDays <= days);
         
         return weekendMarkArea;
       }
 
-     // function  getholidays(dateValue) {
-     //   var n = new Date(dateValue);
-     // return holidayArea;
-     // }
+     
       
       
       function yyyymmddhhmmssToDate(yyyymmddhhmmss) {
