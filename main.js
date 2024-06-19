@@ -663,8 +663,7 @@ const parseMetadata = (metadata) => {
               }
             );
             weekendMarkArea.push(holiday);
-         }
-         i+1;
+        
         } while (i <= 5);
         
         return weekendMarkArea;
