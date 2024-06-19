@@ -637,7 +637,9 @@ const parseMetadata = (metadata) => {
          offsetDays++;
         } while (offsetDays <= days);
 
-
+     var i = 0;
+        
+      do {
        var day = _rawData.data[0][11];
        day = new Date(day.setDate(day.getDate()));
 
@@ -661,7 +663,9 @@ const parseMetadata = (metadata) => {
               }
             );
             weekendMarkArea.push(holiday);
-
+         }
+         i++;
+        } while (i <= 5);
         
         return weekendMarkArea;
       }
