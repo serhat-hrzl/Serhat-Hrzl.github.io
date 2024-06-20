@@ -124,7 +124,8 @@ const parseMetadata = (metadata) => {
       var DIM_BUFFER = 8; // Buffer Time
       var DIM_COLOR = 9; // Status Color
       var DIM_NOW_TIMESTAMP = 10; // Now Time Stamp used for the Markline
-      var DIM_AS_TIMESTAMP = 11; // Date Test
+      var DIM_HOLIDAY_TIMESTAMP = 11; // Holiday timestamp
+      var DIM_TOTAL_HOLIDAYS = 12; // Holiday timestamp
       
 
       var maximumValueSpan = 15;
@@ -638,6 +639,7 @@ const parseMetadata = (metadata) => {
         } while (offsetDays <= days);
 
      var i = 0;
+     var total_holiday = _rawData.data[12];
         
       do {
        var day = _rawData.data[0][11];
@@ -666,7 +668,7 @@ const parseMetadata = (metadata) => {
         
         i = i+1;
         
-        } while (i <= 5);
+        } while (i <= total_holiday );
         
         return weekendMarkArea;
       }
