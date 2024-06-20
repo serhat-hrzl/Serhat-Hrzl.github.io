@@ -124,7 +124,7 @@ const parseMetadata = (metadata) => {
       var DIM_BUFFER = 8; // Buffer Time
       var DIM_COLOR = 9; // Status Color
       var DIM_NOW_TIMESTAMP = 10; // Now Time Stamp used for the Markline
-      var DIM_HOLIDAY_TIMESTAMP = 11; // Holiday timestamp
+      var DIM_TIME_HOLIDAY = 11; // Holiday timestamp
    //   var DIM_TOTAL_HOLIDAYS = 12; // Holiday timestamp
       
 
