@@ -642,9 +642,14 @@ const parseMetadata = (metadata) => {
      var total_holiday = _rawData.data[0][12];
         
       do {
-       var day = _rawData.data[0][11];
-       var N_char = day.slice(0, 2);
-       var d = yyyymmddhhmmssToDate(day);
+       var holiday = _rawData.data[0][11];
+        
+      if i = 1 
+        {
+       var day = holiday.slice(0, 11);
+      }
+       
+        var d = yyyymmddhhmmssToDate(day);
      //  var adjustedTime = getAdjustedTime(d);
         
     //   day = new Date(day.setDate(day.getDate()));
