@@ -644,11 +644,11 @@ const parseMetadata = (metadata) => {
       do {
        var day = _rawData.data[0][11];
        var d = yyyymmddhhmmssToDate(day);
-       var adjustedTime = getAdjustedTime(d);
+     //  var adjustedTime = getAdjustedTime(d);
         
     //   day = new Date(day.setDate(day.getDate()));
 
-       day = new Date(adjustedTime.setDate(adjustedTime.getDate()));
+       day = new Date(d.setDate(d.getDate()));
 
        var holiday = [];
        var [holidayTo, holidayFrom] = [
