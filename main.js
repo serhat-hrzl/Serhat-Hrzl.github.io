@@ -643,12 +643,23 @@ const parseMetadata = (metadata) => {
         
       do {
        var holiday = _rawData.data[0][11];
-       var COUNTER = i;
         
       if ( i === 1);
         {
        var day = holiday.slice(0, 11);
-      }
+      } else if ( i === 2);
+        {
+       var day = holiday.slice(11, 22);
+      } else if ( i === 3);
+        {
+       var day = holiday.slice(22, 33);
+      } else if ( i === 4);
+        {
+       var day = holiday.slice(33, 44);
+      } else if ( i === 5);
+        {
+       var day = holiday.slice(44, 55);
+      } 
        
         var d = yyyymmddhhmmssToDate(day);
      //  var adjustedTime = getAdjustedTime(d);
