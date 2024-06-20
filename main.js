@@ -638,11 +638,12 @@ const parseMetadata = (metadata) => {
          offsetDays++;
         } while (offsetDays <= days);
 
-     var i = 0;
+     var i = 1;
      var total_holiday = _rawData.data[0][12];
         
       do {
        var day = _rawData.data[0][11];
+       var N_char = day.slice(0, 2);
        var d = yyyymmddhhmmssToDate(day);
      //  var adjustedTime = getAdjustedTime(d);
         
