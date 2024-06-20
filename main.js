@@ -644,19 +644,19 @@ const parseMetadata = (metadata) => {
       do {
        var holiday = _rawData.data[0][11];
         
-      if ( i === 1);
+      if ( i === 1)
         {
        var day = holiday.slice(0, 11);
-      } else if ( i === 2);
+      } else if ( i === 2)
         {
        var day = holiday.slice(11, 22);
-      } else if ( i === 3);
+      } else if ( i === 3)
         {
        var day = holiday.slice(22, 33);
-      } else if ( i === 4);
+      } else if ( i === 4)
         {
        var day = holiday.slice(33, 44);
-      } else if ( i === 5);
+      } else 
         {
        var day = holiday.slice(44, 55);
       } 
