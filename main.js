@@ -639,7 +639,7 @@ const parseMetadata = (metadata) => {
         } while (offsetDays <= days);
 
      var i = 0;
-     var total_holiday = _rawData.data[12];
+     var total_holiday = _rawData.data[0][12];
         
       do {
        var day = _rawData.data[0][11];
