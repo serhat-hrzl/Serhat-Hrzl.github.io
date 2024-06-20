@@ -643,8 +643,8 @@ const parseMetadata = (metadata) => {
         
       do {
        var holiday = _rawData.data[0][11];
-        
-      if var i = 1;
+       var COUNTER = i;
+      if (COUNTER() === 1);
         {
        var day = holiday.slice(0, 11);
       }
