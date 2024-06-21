@@ -638,18 +638,28 @@ const parseMetadata = (metadata) => {
          offsetDays++;
         } while (offsetDays <= days);
 
- /******************Appeding Holidays to weekendMarkarea*************************/
+ /******************Appending Holidays to weekendMarkarea*************************/
 
      var i = 1;
   //   var total_holiday = _rawData.data[0][12];
+
+         var holiday = _rawData.data[0][11];
+
+          var number_holidays = holiday.length/14;
+
+          var start_date_char  = 0;
+          var end_date_char = 14;
         
       do {
-       var holiday = _rawData.data[0][11];
 
-        var number_char = holiday.length/14;
+        var day = holiday.slice(start_char, actual_date);
 
         
+
+      //  var number_holidays = holiday.length/14;
+
         
+/*        
       if ( i === 1)
         {
        var day = holiday.slice(0, number_char);
@@ -665,21 +675,21 @@ const parseMetadata = (metadata) => {
       } else 
         {
        var day = holiday.slice(56, 70);
-      } 
+      } */
        
         var d = yyyymmddhhmmssToDate(day);
    
-       day = new Date(d.setDate(d.getDate()));
+     //  day = new Date(d.setDate(d.getDate()));
 
        var holiday = [];
        var [holidayTo, holidayFrom] = [
               new Date(),
               new Date(),
         ];
-       holidayFrom = new Date(day.setDate(day.getDate()));
+       holidayFrom = new Date(d.setDate(d.getDate()));
        holidayFrom = new Date(holidayFrom.setHours(0, 0, 0));
 
-       holidayTo = new Date(day.setDate(day.getDate()));
+       holidayTo = new Date(d.setDate(d.getDate()));
        holidayTo = new Date(holidayTo.setHours(23, 59, 59));
 
          holiday.push(
@@ -692,9 +702,11 @@ const parseMetadata = (metadata) => {
             );
             weekendMarkArea.push(holiday);
         
+        start_date_char = start_date_char+14;
+        end_date_char = end_date_char+14;
         i = i+1;
         
-        } while (i <= number_char );
+        } while (i <= number_holidays );
         
         return weekendMarkArea;
       }
