@@ -640,9 +640,7 @@ const parseMetadata = (metadata) => {
 
  /******************Appending Holidays to weekendMarkarea*************************/
 
-   
-  //   var total_holiday = _rawData.data[0][12];
-
+  
          var holiday = _rawData.data[0][11];
          var number_holidays = holiday.length/14;        
          var i = number_holidays/number_holidays;
@@ -652,33 +650,8 @@ const parseMetadata = (metadata) => {
       do {
 
         var day = holiday.slice(start_date_char, end_date_char);
-
-        
-
-      //  var number_holidays = holiday.length/14;
-
-        
-/*        
-      if ( i === 1)
-        {
-       var day = holiday.slice(0, number_char);
-      } else if ( i === 2)
-        {
-       var day = holiday.slice(14, 28);
-      } else if ( i === 3)
-        {
-       var day = holiday.slice(28, 42);
-      } else if ( i === 4)
-        {
-       var day = holiday.slice(42, 56);
-      } else 
-        {
-       var day = holiday.slice(56, 70);
-      } */
        
         var d = yyyymmddhhmmssToDate(day);
-   
-     //  day = new Date(d.setDate(d.getDate()));
 
        var holiday = [];
        var [holidayTo, holidayFrom] = [
