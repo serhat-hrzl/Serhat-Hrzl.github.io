@@ -645,6 +645,8 @@ const parseMetadata = (metadata) => {
         
       do {
        var holiday = _rawData.data[0][11];
+
+        var number_char = holiday.length;
         
       if ( i === 1)
         {
