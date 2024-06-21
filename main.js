@@ -652,7 +652,7 @@ const parseMetadata = (metadata) => {
         
       do {
 
-        var day = holiday.slice(start_char, actual_date);
+        var day = holiday.slice(start_date_char, end_date_char);
 
         
 
