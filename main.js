@@ -641,16 +641,18 @@ const parseMetadata = (metadata) => {
  /******************Appeding Holidays to weekendMarkarea*************************/
 
      var i = 1;
-     var total_holiday = _rawData.data[0][12];
+  //   var total_holiday = _rawData.data[0][12];
         
       do {
        var holiday = _rawData.data[0][11];
 
         var number_char = holiday.length;
+
+        
         
       if ( i === 1)
         {
-       var day = holiday.slice(0, 14);
+       var day = holiday.slice(0, number_char);
       } else if ( i === 2)
         {
        var day = holiday.slice(14, 28);
@@ -692,7 +694,7 @@ const parseMetadata = (metadata) => {
         
         i = i+1;
         
-        } while (i <= total_holiday );
+        } while (i <= number_char );
         
         return weekendMarkArea;
       }
