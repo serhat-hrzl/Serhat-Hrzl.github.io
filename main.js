@@ -644,7 +644,7 @@ const parseMetadata = (metadata) => {
   //   var total_holiday = _rawData.data[0][12];
 
          var holiday = _rawData.data[0][11];
-         var total_number_holidays = holiday.length/14;        
+         var number_holidays = holiday.length/14;        
          var i = number_holidays/number_holidays;
          var start_date_char  = 0;
          var end_date_char = 14;
@@ -705,7 +705,7 @@ const parseMetadata = (metadata) => {
         end_date_char = end_date_char+14;
         i = i+1;
         
-        } while (i <= total_number_holidays);
+        } while (i <= number_holidays);
         
         return weekendMarkArea;
       }
