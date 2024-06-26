@@ -104,7 +104,7 @@ const parseMetadata = (metadata) => {
         );
       });
   //  var weekends = [];
-    var weekendMarkArea = getUpcomingWeekends(10);
+   // var weekendMarkArea = getUpcomingWeekends(10);
       aData.data.forEach((row, index) => {
         row[0] = index;
       });
@@ -151,7 +151,7 @@ const parseMetadata = (metadata) => {
           markline.setHours(23, 59, 59, 0);
         }
 
-       // var weekendMarkArea = getUpcomingWeekends(10);
+        var weekendMarkArea = getUpcomingWeekends(10);
 
        
 
