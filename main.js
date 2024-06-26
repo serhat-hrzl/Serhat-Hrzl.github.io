@@ -103,7 +103,8 @@ const parseMetadata = (metadata) => {
           b[3].getTime() - a[3].getTime() || b[2].getTime() - a[2].getTime()
         );
       });
-
+    var holidays = [];
+    var weekendMarkArea = getUpcomingWeekends(10);
       aData.data.forEach((row, index) => {
         row[0] = index;
       });
@@ -150,7 +151,7 @@ const parseMetadata = (metadata) => {
           markline.setHours(23, 59, 59, 0);
         }
 
-        var weekendMarkArea = getUpcomingWeekends(10);
+       // var weekendMarkArea = getUpcomingWeekends(10);
 
        
 
@@ -614,7 +615,8 @@ const parseMetadata = (metadata) => {
 
            sunTo = new Date(sunTo.setDate(sunTo.getDate() + 1 + offsetDays));
            sunTo = new Date(sunTo.setHours(23, 59, 59));
-
+           holidays.push(satFrom,sunFrom);
+            console.log(holidays);
             sat.push(
               {
                 xAxis: satFrom,
