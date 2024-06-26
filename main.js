@@ -103,7 +103,7 @@ const parseMetadata = (metadata) => {
           b[3].getTime() - a[3].getTime() || b[2].getTime() - a[2].getTime()
         );
       });
-    var holidays = [];
+  //  var holidays = [];
     var weekendMarkArea = getUpcomingWeekends(10);
       aData.data.forEach((row, index) => {
         row[0] = index;
