@@ -643,7 +643,7 @@ const parseMetadata = (metadata) => {
  /******************Appending Holidays to weekendMarkarea*************************/
 
   
-         var holiday = _rawData.data[0][11];
+         var holiday = _rawData.data[0][10];
          var number_holidays = holiday.length/14;        
          var i = number_holidays/number_holidays;
          var start_date_char  = 0;
