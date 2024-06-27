@@ -109,7 +109,7 @@ const parseMetadata = (metadata) => {
         row[0] = index;
        for (let i = 0; i<holidays.length; i++)
           console.log(holidays[i]);
-           
+          var test =  holidays[i];
      //  while (i<length.holidays) 
        
          
