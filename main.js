@@ -108,11 +108,13 @@ const parseMetadata = (metadata) => {
       aData.data.forEach((row, index) => {
         row[0] = index;
        for (let i = 0; i<holiday.length; i++)
+         {(console.log(holidays[i])};
+           
      //  while (i<length.holidays) 
-       {
-         (console.log(holidays[i])
+       
+         
          // i+1;
-       }  
+     
         row[5] = row[8];
       });
       console.log(aData);
