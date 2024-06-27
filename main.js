@@ -110,8 +110,7 @@ const parseMetadata = (metadata) => {
         var i = 0;
        do
        {
-       } 
-         } while (i <= 2);
+       }  while (i <= 2);
         row[5] = row[8];
       });
       console.log(aData);
