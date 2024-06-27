@@ -107,7 +107,7 @@ const parseMetadata = (metadata) => {
      var weekendMarkArea = getUpcomingWeekends(10);
       aData.data.forEach((row, index) => {
         row[0] = index;
-       for (let i = 0; i<holiday.length; i++)
+       for (let i = 0; i<holidays.length; i++)
       //   console.log(holidays[i];
            
      //  while (i<length.holidays) 
