@@ -105,16 +105,21 @@ const parseMetadata = (metadata) => {
       });
      var holidays = [];
      var weekendMarkArea = getUpcomingWeekends(10);
-      aData.data.forEach((row, index) => {
-        row[0] = index;
-       for (let i = 0; i<holidays.length; i++)
+
+      for (let i = 0; i<holidays.length; i++)
+       
+        { 
           console.log(holidays[i]);
-          var test =  holidays[i];
+          var test =  holidays[i]; 
+        }
      //  while (i<length.holidays) 
        
          
          // i+1;
      
+      aData.data.forEach((row, index) => {
+        row[0] = index;
+       
         row[5] = row[8];
       });
       console.log(aData);
