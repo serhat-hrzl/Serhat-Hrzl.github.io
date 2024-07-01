@@ -121,7 +121,6 @@ const parseMetadata = (metadata) => {
       aData.data.forEach((row, index) => {
         row[0] = index;
        
-        row[5] = row[8];
       });
       console.log(aData);
 
