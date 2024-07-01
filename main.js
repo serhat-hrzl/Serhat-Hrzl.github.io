@@ -104,7 +104,7 @@ const parseMetadata = (metadata) => {
         );
       });
    //  var holidays = [];
-     var weekendMarkArea = getUpcomingWeekends(10);
+   //  var weekendMarkArea = getUpcomingWeekends(10);
 
    /*   for (let i = 0; i<holidays.length; i++)
        
@@ -165,7 +165,7 @@ const parseMetadata = (metadata) => {
           markline.setHours(23, 59, 59, 0);
         }
 
-     //   var weekendMarkArea = getUpcomingWeekends(10);
+       var weekendMarkArea = getUpcomingWeekends(10);
 
        
 
@@ -629,7 +629,7 @@ const parseMetadata = (metadata) => {
 
            sunTo = new Date(sunTo.setDate(sunTo.getDate() + 1 + offsetDays));
            sunTo = new Date(sunTo.setHours(23, 59, 59));
-           holidays.push(satFrom,sunFrom);
+          // holidays.push(satFrom,sunFrom);
           // console.log(holidays);
             sat.push(
               {
