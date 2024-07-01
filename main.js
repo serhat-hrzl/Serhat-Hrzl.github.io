@@ -103,10 +103,10 @@ const parseMetadata = (metadata) => {
           b[3].getTime() - a[3].getTime() || b[2].getTime() - a[2].getTime()
         );
       });
-     var holidays = [];
+   //  var holidays = [];
      var weekendMarkArea = getUpcomingWeekends(10);
 
-      for (let i = 0; i<holidays.length; i++)
+   /*   for (let i = 0; i<holidays.length; i++)
        
         { 
           console.log(holidays[i]);
@@ -115,7 +115,7 @@ const parseMetadata = (metadata) => {
      //  while (i<length.holidays) 
        
          
-         // i+1;
+         // i+1;*/
      
       aData.data.forEach((row, index) => {
         row[0] = index;
