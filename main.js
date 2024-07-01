@@ -118,7 +118,7 @@ const parseMetadata = (metadata) => {
        //   console.log(holidays[i]);
           var test =  holidays[i]; 
         }
-       while (i<length.holidays) ;
+     //  while (i<length.holidays) ;
        
     
         
