@@ -111,12 +111,14 @@ const parseMetadata = (metadata) => {
      
       aData.data.forEach((row, index) => {
         row[0] = index;
-
+          var num = 0;
            for (let i = 0; i<holidays.length; i++)
        
         { 
        //   console.log(holidays[i]);
           var test =  holidays[i]; 
+          if  (holidays[i] > row[10]) 
+          {var num = num+1}
         }
      //  while (i<length.holidays) ;
        
