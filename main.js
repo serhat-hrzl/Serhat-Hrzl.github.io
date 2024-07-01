@@ -60,7 +60,7 @@ const parseMetadata = (metadata) => {
 
       await getScriptPromisify(
        // "https://cdn.staticfile.org/echarts/5.0.0/echarts.min.js"
-        "https://cdnjs.cloudflare.com/ajax/libs/echarts/5.5.0/echarts.common.min.js"
+        "https://cdn.jsdelivr.net/npm/echarts@5.0.0/dist/echarts.min.js"
       );
 
       /*------------------------------ Process model data bound to the widget ----------------------------------*/
