@@ -123,9 +123,10 @@ const parseMetadata = (metadata) => {
           var AP_TIME = new Date(AP_TIME.setHours(0, 0, 0)); 
          // var STATUS_CODE = row[14];
           var STATUS_CODE = row[14].slice(0,3);
-          if  (STATUS_CODE === 401 )
-               //&& holidays[i] > PS_START && holidays[i] < PE_END ) 
-          {var num = num+1}
+          if  (STATUS_CODE === 401 && holidays[i] > PS_START && holidays[i] < PE_END ) 
+          {var num = num+1} 
+          else if (holidays[i] > AP_TIME && holidays[i] < PE_END )
+            {var num = num+1} 
         }
      //  while (i<length.holidays) ;
        
