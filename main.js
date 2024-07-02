@@ -130,7 +130,7 @@ const parseMetadata = (metadata) => {
         }
      //  while (i<length.holidays) ;
        
-        row[5] = row[5] - (num*1440); // reducing weekend 
+        row[5] = row[5] - (num*1440); // weekends are reduced from remaining time.
         
       });
       console.log(aData);
