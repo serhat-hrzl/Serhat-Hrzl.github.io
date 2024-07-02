@@ -126,7 +126,7 @@ const parseMetadata = (metadata) => {
          // var STATUS_CODE = row[14];
           var STATUS_CODE = row[14].slice(0,3);
 
----  *********************************** weekends are reduced from remaining time************************
+/*--------------------------weekends are reduced from remaining time-----------------------------------*/
           
           if  (STATUS_CODE === 401 && holidays[i] >= PS_START && holidays[i] <= PE_END ) 
           {var num = num+1} 
@@ -135,7 +135,7 @@ const parseMetadata = (metadata) => {
         }
        
         row[5] = row[5] - (num*1440); // weekends are reduced from remaining time.
-  ---  *********************************** weekends are reduced from buffer time************************ 
+  /*----------------------------weekends are reduced from buffer time------------------------------------*/
           if  (holidays[i] >= NW_TIME && holidays[i] <= AP_TIME ) 
           {var num_bf = num+1} 
           else if (holidays[i] >= AP_TIME && holidays[i] <= NW_TIME )
