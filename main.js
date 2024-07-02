@@ -111,7 +111,8 @@ const parseMetadata = (metadata) => {
      
       aData.data.forEach((row, index) => {
         row[0] = index;
-          var num = 0;
+          var num_rt = 0;
+          var num_bf = 0;
            for (let i = 0; i<holidays.length; i++)
        
         { 
@@ -119,19 +120,28 @@ const parseMetadata = (metadata) => {
           var test =  holidays[i]; 
           var PS_START = new Date(row[2].setHours(0, 0, 0));
           var PE_END = new Date(row[3].setHours(0, 0, 0)); 
+          var NW_TIME = new Date(row[10].setHours(0, 0, 0)); 
           var AP_TIME = yyyymmddhhmmssToDate(row[13]);
           var AP_TIME = new Date(AP_TIME.setHours(0, 0, 0)); 
          // var STATUS_CODE = row[14];
           var STATUS_CODE = row[14].slice(0,3);
+
+---  *********************************** weekends are reduced from remaining time************************
+          
           if  (STATUS_CODE === 401 && holidays[i] >= PS_START && holidays[i] <= PE_END ) 
           {var num = num+1} 
           else if (holidays[i] >= AP_TIME && holidays[i] <= PE_END )
             {var num = num+1} 
         }
-     //  while (i<length.holidays) ;
        
         row[5] = row[5] - (num*1440); // weekends are reduced from remaining time.
-        
+  ---  *********************************** weekends are reduced from buffer time************************ 
+          if  (holidays[i] >= NW_TIME && holidays[i] <= AP_TIME ) 
+          {var num_bf = num+1} 
+          else if (holidays[i] >= AP_TIME && holidays[i] <= NW_TIME )
+            {var num_bf = num+1} 
+        }
+        row[8] = row[8] - (num*1440) // weekends are reduced from buffer time.
       });
       console.log(aData);
 
