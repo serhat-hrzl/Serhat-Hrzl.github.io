@@ -121,7 +121,7 @@ const parseMetadata = (metadata) => {
           var PE_END = new Date(row[3].setHours(0, 0, 0)); 
           var AP_TIME = yyyymmddhhmmssToDate(row[13]);
           var AP_TIME = new Date(AP_TIME.setHours(0, 0, 0)); 
-          if  (holidays[i] > row[10]) 
+          if  (row[14] = '401' && holidays[i] > PS_START && holidays[i] < PE_END ) 
           {var num = num+1}
         }
      //  while (i<length.holidays) ;
