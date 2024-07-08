@@ -124,9 +124,10 @@ const parseMetadata = (metadata) => {
           b[3].getTime() - a[3].getTime() || b[2].getTime() - a[2].getTime()
         );
       });
+
       var holidays = getUpcomingHolidays(aData.data[0][DIM_HOLIDAY_STRING]);
       var holidayMarkArea = getHolidayMarkArea(holidays);
-
+     
       aData.data.forEach((row, index) => {
         row[DIM_CATEGORY_INDEX] = index;
         
@@ -157,7 +158,6 @@ const parseMetadata = (metadata) => {
           absoluteProgressTime
         );
         row[DIM_BUFFER] = parseFloat(row[DIM_BUFFER]) - holidaysCount * 24 * 60;
-
       });
 
       /*-------------------------------------Chart related customizations---------------------------------------*/
@@ -166,7 +166,6 @@ const parseMetadata = (metadata) => {
       let option;
 
       var _rawData;
-
       _rawData = aData;
       myChart.setOption((option = generateOptions()));
 
@@ -379,6 +378,7 @@ const parseMetadata = (metadata) => {
               id: "orderData",
               type: "custom",
               renderItem: renderBar,
+
               dimensions: [
                 null,
                 null,
@@ -669,7 +669,6 @@ const parseMetadata = (metadata) => {
         });
         return count;
       }
-
       function yyyymmddhhmmssToDate(yyyymmddhhmmss) {
         const year = parseInt(yyyymmddhhmmss.substring(0, 4));
         const month = parseInt(yyyymmddhhmmss.substring(4, 6)) - 1;
