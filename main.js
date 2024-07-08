@@ -148,8 +148,8 @@ const parseMetadata = (metadata) => {
             row[absoluteProgressTime],
             row[DIM_TIME_END]
           );
-          row[DIM_CURRENT_ACTIVITY_TIME] = parseFloat(row[DIM_CURRENT_ACTIVITY_TIME]) - holidaysCount * 24 * 60;
          }
+         row[DIM_CURRENT_ACTIVITY_TIME] = parseFloat(row[DIM_CURRENT_ACTIVITY_TIME]) - holidaysCount * 24 * 60;
 
         // Adjust Buffer Time
         holidaysCount = countNumberOfHolidaysBetween(
