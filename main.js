@@ -53,13 +53,34 @@ const parseMetadata = (metadata) => {
     }
 
     async render() {
+      /*Constants*/
+      var DIM_CATEGORY_INDEX = 0; //Index field used as an internal identifier
+      var DIM_ORDER_NUMBER = 1; // Order Number
+      var DIM_TIME_START = 2; // Planned Start Timestamp
+      var DIM_TIME_END = 3; // Planned End Timestamp
+      var DIM_WORKCENTER = 4; // WorkCenter
+      var DIM_CURRENT_ACTIVITY_TIME = 5; // Time in Current Activity
+      var DIM_TIME_PROGRESS = 6; // Absolute Progress Timestamp
+      var DIM_BUFFER = 8; // Buffer Time
+      var DIM_COLOR = 9; // Status Color
+      var DIM_NOW_TIMESTAMP = 10; // Now Time Stamp used for the Markline
+      var DIM_HOLIDAY_STRING = 11; // Holiday timestamp
+      var DIM_ABSOLUTE_TIME = 12; // Absolute Time (same as DIM_TIME_PROGRESS but without _TIMESTAMP)
+      var DIM_NOW_TIME = 13 ; // Now Time (same as DIM_NOW_TIMESTAMP but without _TIMESTAMP)
+      var DIM_STATUS_CODE = 14; // Status code
+
+
+      var CHECK_NUMBER_OF_DAYS_FOR_WEEKENDS = 10;
+      var MAXIMUM_VALUE_SPAN = 15;
+      var NUMBER_OF_SPLITS = 8;
+
       const dataBinding = this.dataBinding;
       if (!dataBinding || dataBinding.state !== "success") {
         return;
       }
 
       await getScriptPromisify(
-        "https://cdn.staticfile.org/echarts/5.0.0/echarts.min.js"
+        "https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"
       );
 
       /*------------------------------ Process model data bound to the widget ----------------------------------*/
@@ -96,82 +117,78 @@ const parseMetadata = (metadata) => {
       measures.forEach((measure) => {
         aData["dimensions"].push(measure.id);
       });
-/* Sort the result set in descending order. The graph is plotted from bottom to top, hence sorting the data in descending order
- to make it appear in ascending when it is rendered */
+      /* Sort the result set in descending order. The graph is plotted from bottom to top, hence sorting the data in descending order
+       to make it appear in ascending when it is rendered */
       aData.data.sort(function (a, b) {
         return (
           b[3].getTime() - a[3].getTime() || b[2].getTime() - a[2].getTime()
         );
       });
+      var holidays = getUpcomingHolidays(aData.data[0][DIM_HOLIDAY_STRING]);
+      var holidayMarkArea = getHolidayMarkArea(holidays);
 
       aData.data.forEach((row, index) => {
-        row[0] = index;
+        row[DIM_CATEGORY_INDEX] = index;
+        
+        let holidaysCount = 0 ;
+        let absoluteProgressTime = new Date(yyyymmddhhmmssToDate(row[DIM_ABSOLUTE_TIME]).setHours(0,0,0));
+        let nowTime = new Date(yyyymmddhhmmssToDate(row[DIM_NOW_TIME]).setHours(0,0,0));
+        
+        // Adjust Remainining Time
+         if (row[DIM_STATUS_CODE] === 401) {
+          holidaysCount = countNumberOfHolidaysBetween(
+            holidays,
+            row[DIM_TIME_START],
+            row[DIM_TIME_END]
+          );
+         } else {
+          holidaysCount = countNumberOfHolidaysBetween(
+            holidays,
+            row[absoluteProgressTime],
+            row[DIM_TIME_END]
+          );
+          row[DIM_CURRENT_ACTIVITY_TIME] = parseFloat(row[DIM_CURRENT_ACTIVITY_TIME]) - holidaysCount * 24 * 60;
+         }
+
+        // Adjust Buffer Time
+        holidaysCount = countNumberOfHolidaysBetween(
+          holidays,
+          nowTime,
+          absoluteProgressTime
+        );
+        row[DIM_BUFFER] = parseFloat(row[DIM_BUFFER]) - holidaysCount * 24 * 60;
+
       });
-      console.log(aData);
 
       /*-------------------------------------Chart related customizations---------------------------------------*/
 
       const myChart = echarts.init(this._root, "main");
       let option;
 
-      var DIM_CATEGORY_INDEX = 0; //Index field used as an internal identifier
-      var DIM_ORDER_NUMBER = 1; // Order Number
-      var DIM_TIME_START = 2; // Planned Start Timestamp
-      var DIM_TIME_END = 3; // Planned End Timestamp
-      var DIM_WORKCENTER = 4; // WorkCenter
-      var DIM_CURRENT_ACTIVITY_TIME = 5; // Time in Current Activity
-      var DIM_TIME_PROGRESS = 6; // Absolute Progress Timestamp
-      var DIM_BUFFER = 8; // Buffer Time
-      var DIM_COLOR = 9; // Status Color
-      var DIM_NOW_TIMESTAMP = 10; // Now Time Stamp used for the Markline
-      
-
-      var maximumValueSpan = 15;
       var _rawData;
 
       _rawData = aData;
       myChart.setOption((option = generateOptions()));
 
       function generateOptions() {
-        var markline = _rawData.data[0][10]; // Now Timestamp Markline
+        var markline = _rawData.data[0][DIM_NOW_TIMESTAMP]; // Now Timestamp Markline
         var axisStartValue =
-          _rawData.data.length < maximumValueSpan
+          _rawData.data.length < MAXIMUM_VALUE_SPAN
             ? 0
-            : _rawData.data.length - maximumValueSpan;
+            : _rawData.data.length - MAXIMUM_VALUE_SPAN;
         var axisEndValue =
-          _rawData.data.length < maximumValueSpan
-            ? maximumValueSpan
+          _rawData.data.length < MAXIMUM_VALUE_SPAN
+            ? MAXIMUM_VALUE_SPAN
             : _rawData.data.length;
-        var currentDate = new Date();
-        if (!sameDay(markline, currentDate)) {
+        var holidayDate = new Date();
+        if (!sameDay(markline, holidayDate)) {
           markline.setDate(markline.getDate() - 1);
           markline.setHours(23, 59, 59, 0);
         }
 
-        var weekendMarkArea = getUpcomingWeekends(10);
-
         return {
           tooltip: {
             show: false,
-            /* Commenting the code below as this feature will be shipped with v2 */
-            // trigger: "item",
-            // axisPointer: {
-            //   type: "shadow",
-            // },
-            // formatter: function (params) {
-            //   var startDateTime = echarts.format.formatTime(
-            //     "dd-MM-yyyy hh:mm",
-            //     params.data[2]
-            //   );
-            //   var endDateTime = echarts.format.formatTime(
-            //     "dd-MM-yyyy hh:mm",
-            //     params.data[3]
-            //   );
-            //   var line1 = `<span style="border-left: 2px solid #fff;display: inline-block;height: 12px;margin-right: 5px;">Start Date </span>`;
-            //   var line2 = `</br><span style="border-left: 2px solid #fff;display: inline-block;height: 12px;margin-right: 5px;">End Date </span>`;
-            //   return `${line1} ${startDateTime}
-            //             ${line2} ${endDateTime}`;
-            // },
           },
           animation: false,
           dataZoom: [
@@ -186,7 +203,7 @@ const parseMetadata = (metadata) => {
               handleSize: 0,
               showDetail: false,
               filterMode: "weakFilter",
-              maxValueSpan: maximumValueSpan,
+              maxValueSpan: MAXIMUM_VALUE_SPAN,
               startValue: axisStartValue,
               endValue: axisEndValue,
             },
@@ -204,9 +221,9 @@ const parseMetadata = (metadata) => {
                     left: "center",
                     top: "middle",
                     style: {
-                      fill: "#333",
+                      fill: "#696969",
                       width: 100,
-                      font: "bolder 12px Microsoft YaHei",
+                      font: "normal 14px Helvetica",
                       overflow: "break",
                       text: "Auftrag",
                     },
@@ -244,8 +261,8 @@ const parseMetadata = (metadata) => {
                     left: "center",
                     top: "middle",
                     style: {
-                      fill: "#333",
-                      font: "bolder 12px Microsoft YaHei",
+                      fill: "#696969",
+                      font: "normal 14px Helvetica",
                       width: 100,
                       overflow: "break",
                       text: "Verleibende Auftragsdauer",
@@ -284,8 +301,8 @@ const parseMetadata = (metadata) => {
                     left: "center",
                     top: "middle",
                     style: {
-                      fill: "#333",
-                      font: "bolder 12px Microsoft YaHei",
+                      fill: "#696969",
+                      font: "normal 14px Helvetica",
                       width: 100,
                       overflow: "break",
                       text: "Puffer",
@@ -309,13 +326,15 @@ const parseMetadata = (metadata) => {
             position: "top",
             min: function (value) {
               let d = new Date();
-              if(d.getDay() === 1) {
-              d.setDate(d.getDate() - 5);
-              } else if(d.getDay() === 2){
-              d.setDate(d.getDate() - 5);
-              } else if(d.getDay() === 3){
-              d.setDate(d.getDate() - 5);
-              } else { d.setDate(d.getDate() - 3); }
+              if (d.getDay() === 1) {
+                d.setDate(d.getDate() - 5);
+              } else if (d.getDay() === 2) {
+                d.setDate(d.getDate() - 5);
+              } else if (d.getDay() === 3) {
+                d.setDate(d.getDate() - 5);
+              } else {
+                d.setDate(d.getDate() - 3);
+              }
               d.setHours(0, 0, 0, 0);
               return d;
             },
@@ -325,7 +344,7 @@ const parseMetadata = (metadata) => {
               d.setHours(0, 0, 0, 0);
               return d;
             },
-            splitNumber: 8, // Should be made dynamic if the number of days to be displayed changes
+            splitNumber: NUMBER_OF_SPLITS, // Should be made dynamic if the number of days to be displayed changes
             splitLine: {
               show: true,
               lineStyle: {
@@ -344,6 +363,7 @@ const parseMetadata = (metadata) => {
               inside: false,
               align: "center",
               formatter: "{dd}-{MMM}",
+              fontSize: 16,
             },
           },
           yAxis: {
@@ -359,7 +379,20 @@ const parseMetadata = (metadata) => {
               id: "orderData",
               type: "custom",
               renderItem: renderBar,
-              dimensions: _rawData.data,
+              dimensions: [
+                null,
+                null,
+                null,
+                null,
+                { type: "ordinal" },
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+              ],
               encode: {
                 x: [DIM_TIME_START, DIM_TIME_END],
                 y: DIM_CATEGORY_INDEX,
@@ -390,7 +423,7 @@ const parseMetadata = (metadata) => {
                 itemStyle: {
                   color: "rgba(230, 230, 230, 0.8)",
                 },
-                data: weekendMarkArea,
+                data: holidayMarkArea,
               },
             },
             {
@@ -425,7 +458,7 @@ const parseMetadata = (metadata) => {
         var barHeight = 30;
         var x = timestampStart[0];
         var y = timestampStart[1] - barHeight;
-        var barDescription = api.value(4) + " ";
+        var barDescription = api.value(DIM_WORKCENTER).toString() + " ";
         var barDescriptionWidth =
           echarts.format.getTextRect(barDescription).width;
         var text = barLength > barDescriptionWidth + 30 ? barDescription : "";
@@ -451,7 +484,7 @@ const parseMetadata = (metadata) => {
         });
 
         var statusColor;
-        switch (api.value(9)) {
+        switch (api.value(DIM_COLOR)) {
           case "GREEN":
             statusColor = "#0e8f33";
             break;
@@ -462,7 +495,6 @@ const parseMetadata = (metadata) => {
             statusColor = "#a3a3a3";
             break;
         }
-
         return {
           type: "group",
           children: [
@@ -487,13 +519,16 @@ const parseMetadata = (metadata) => {
                 stroke: "transparent",
                 text: text,
                 textFill: "#fff",
+                fontFamily: "Helvetica",
+                fontSize: 14,
               }),
             },
           ],
         };
       }
+
       function renderLabel(params, api) {
-        var statusColor = api.value(8) > 0 ? "Green" : "Red";
+        var statusColor = api.value(DIM_BUFFER) > 0 ? "Green" : "Red";
         var y = api.coord([0, api.value(0)])[1];
         if (y < params.coordSys.y + 5) {
           return;
@@ -502,29 +537,15 @@ const parseMetadata = (metadata) => {
           type: "group",
           position: [0, y],
           children: [
-            // {
-            //   type: "path",
-            //   shape: {
-            //     d: "M 0 0 L 0 -20 L 30 -20 C 34 -20 30 -20 34 -20 L 34 0 L 70 0 Z",
-            //     x: 0,
-            //     y: -20,
-            //     width: 350,
-            //     height: 23,
-            //     layout: "cover",
-            //   },
-            //   style: {
-            //     fill: "black",
-            //   },
-            // },
             {
               type: "text",
               style: {
                 x: 50,
                 y: -3,
-                text: api.value(1) + " ",
+                text: api.value(DIM_ORDER_NUMBER) + " ",
                 textVerticalAlign: "bottom",
                 textAlign: "left",
-                font: "bolder 10px Microsoft YaHei",
+                font: "bold 14px Helvetica",
               },
             },
             {
@@ -532,9 +553,10 @@ const parseMetadata = (metadata) => {
               style: {
                 x: 250,
                 y: -3,
-                text: api.value(5) + " mins",
+                text: api.value(DIM_CURRENT_ACTIVITY_TIME) + " mins",
                 textVerticalAlign: "bottom",
                 textAlign: "center",
+                font: "normal 14px Helvetica",
               },
             },
             {
@@ -542,15 +564,17 @@ const parseMetadata = (metadata) => {
               style: {
                 x: 375,
                 y: -3,
-                text: api.value(8) + " mins",
+                text: api.value(DIM_BUFFER) + " mins",
                 textVerticalAlign: "bottom",
                 textAlign: "center",
                 textFill: statusColor,
+                font: "normal 14px Helvetica",
               },
             },
           ],
         };
       }
+
       function overLap(params, rect) {
         return echarts.graphic.clipRectByRect(rect, {
           x: params.coordSys.x,
@@ -559,6 +583,7 @@ const parseMetadata = (metadata) => {
           height: params.coordSys.height,
         });
       }
+
       function getAdjustedTime(dateValue) {
         let d = new Date(dateValue);
         let hours = d.getHours();
@@ -570,6 +595,7 @@ const parseMetadata = (metadata) => {
         n.setSeconds(+decimalTimeString * 60 * 60);
         return n;
       }
+
       function sameDay(d1, d2) {
         return (
           d1.getFullYear() === d2.getFullYear() &&
@@ -577,59 +603,73 @@ const parseMetadata = (metadata) => {
           d1.getDate() === d2.getDate()
         );
       }
+
+      function getUpcomingHolidays(holidayString) {
+        holidayString = "20241231,20241230,20241227,20241226,20240626,20240709"; //REMOVE !!!
+        const holidays = holidayString.split(",");
+        var upcomingHolidays = [];
+        holidays.forEach((holiday) => {
+          upcomingHolidays.push(yyyymmddhhmmssToDate(holiday + "000000"));
+        });
+        upcomingHolidays = upcomingHolidays.concat(
+          getUpcomingWeekends(CHECK_NUMBER_OF_DAYS_FOR_WEEKENDS)
+        );
+        return upcomingHolidays;
+      }
+
       function getUpcomingWeekends(days) {
-        var weekendMarkArea = [];
+        var weekends = [];
         var offsetDays = -1 * days;
         do {
           var day = new Date();
           day = new Date(day.setDate(day.getDate() + offsetDays));
           if (day.getDay() === 6) {
-            var sat = [];
-            var sun = [];
-            var [sunTo, sunFrom, satTo, satFrom] = [
-              new Date(),
-              new Date(),
-              new Date(),
-              new Date(),
-            ];
+            var [satFrom, sunFrom] = [new Date(), new Date()];
             satFrom = new Date(satFrom.setDate(satFrom.getDate() + offsetDays));
             satFrom = new Date(satFrom.setHours(0, 0, 0));
-
-            satTo = new Date(satTo.setDate(satTo.getDate() + offsetDays));
-            satTo = new Date(satTo.setHours(23, 59, 59));
-
             sunFrom = new Date(
               sunFrom.setDate(sunFrom.getDate() + 1 + offsetDays)
             );
             sunFrom = new Date(sunFrom.setHours(0, 0, 0));
-
-            sunTo = new Date(sunTo.setDate(sunTo.getDate() + 1 + offsetDays));
-            sunTo = new Date(sunTo.setHours(23, 59, 59));
-
-            sat.push(
-              {
-                xAxis: satFrom,
-              },
-              {
-                xAxis: satTo,
-              }
-            );
-            weekendMarkArea.push(sat);
-
-            sun.push(
-              {
-                xAxis: sunFrom,
-              },
-              {
-                xAxis: sunTo,
-              }
-            );
-            weekendMarkArea.push(sun);
+            weekends.push(satFrom, sunFrom);
           }
           offsetDays++;
         } while (offsetDays <= days);
-        return weekendMarkArea;
+        return weekends;
       }
+
+      function getHolidayMarkArea(holidays) {
+        var holidayMarkArea = [];
+        holidays.forEach((holiday, index) => {
+          var [day, dayFrom, dayTo] = [[], new Date(), new Date()];
+          dayFrom = new Date(holiday.setHours(0, 0, 0));
+          dayTo = new Date(holiday.setHours(23, 59, 59));
+          day.push(
+            {
+              xAxis: dayFrom,
+            },
+            {
+              xAxis: dayTo,
+            }
+          );
+          holidayMarkArea.push(day);
+        });
+        return holidayMarkArea;
+      }
+
+      function countNumberOfHolidaysBetween(holidaysList, startDate, endDate) {
+        let start = new Date(startDate);
+        let end = new Date(endDate);
+        let count = 0;
+        holidaysList.forEach((dateStr) => {
+          let holidayDate = new Date(dateStr);
+          if (holidayDate >= start && holidayDate <= end) {
+            count++;
+          }
+        });
+        return count;
+      }
+
       function yyyymmddhhmmssToDate(yyyymmddhhmmss) {
         const year = parseInt(yyyymmddhhmmss.substring(0, 4));
         const month = parseInt(yyyymmddhhmmss.substring(4, 6)) - 1;
