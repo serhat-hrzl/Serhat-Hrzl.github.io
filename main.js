@@ -70,7 +70,7 @@ const parseMetadata = (metadata) => {
       var DIM_STATUS_CODE = 14; // Status code
 
 
-      var CHECK_NUMBER_OF_DAYS_FOR_WEEKENDS = 10;
+      var CHECK_NUMBER_OF_DAYS_FOR_WEEKENDS = 30;
       var MAXIMUM_VALUE_SPAN = 15;
       var NUMBER_OF_SPLITS = 8;
 
@@ -605,7 +605,7 @@ const parseMetadata = (metadata) => {
       }
 
       function getUpcomingHolidays(holidayString) {
-        holidayString = "20241231,20241230,20241227,20241226,20240626,20240709"; //REMOVE !!!
+     //   holidayString = "20241231,20241230,20241227,20241226,20240626,20240709"; //REMOVE !!!
         const holidays = holidayString.split(",");
         var upcomingHolidays = [];
         holidays.forEach((holiday) => {
