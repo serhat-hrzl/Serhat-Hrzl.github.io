@@ -145,7 +145,7 @@ const parseMetadata = (metadata) => {
          } else {
           holidaysCount = countNumberOfHolidaysBetween(
             holidays,
-            row[absoluteProgressTime],
+            absoluteProgressTime,
             row[DIM_TIME_END]
           );
          }
