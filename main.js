@@ -171,7 +171,7 @@ const parseMetadata = (metadata) => {
         } else 
         { row[DIM_BUFFER] = parseFloat(row[DIM_BUFFER]) - holidaysCount * 24 * 60;}
 
-        if (nowTime < startTime) {
+        if (row[DIM_NOW_TIMESTAMP] < row[DIM_TIME_START]) {
          row[DIM_BUFFER] = 0;
         } else 
         { row[DIM_BUFFER] = row[DIM_BUFFER] }
