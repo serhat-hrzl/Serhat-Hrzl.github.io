@@ -164,7 +164,10 @@ const parseMetadata = (metadata) => {
          absoluteProgressTime
         );
        }
-         row[DIM_BUFFER] = parseFloat(row[DIM_BUFFER]) - holidaysCount * 24 * 60;
+        if (DIM_COLOR == 'RED'){
+         row[DIM_BUFFER] = parseFloat(row[DIM_BUFFER]) + holidaysCount * 24 * 60;
+        } else 
+        { row[DIM_BUFFER] = parseFloat(row[DIM_BUFFER]) - holidaysCount * 24 * 60;}
       });
 
       /*-------------------------------------Chart related customizations---------------------------------------*/
