@@ -134,6 +134,8 @@ const parseMetadata = (metadata) => {
         let holidaysCount = 0 ;
         let absoluteProgressTime = new Date(yyyymmddhhmmssToDate(row[DIM_ABSOLUTE_TIME]).setHours(0,0,0));
         let nowTime = new Date(yyyymmddhhmmssToDate(row[DIM_NOW_TIME]).setHours(0,0,0));
+        let startTime = new Date(yyyymmddhhmmssToDate(row[DIM_TIME_START]).setHours(0,0,0));
+        
         
         // Adjust Remainining Time
          if (row[DIM_STATUS_CODE] === 401) {
@@ -169,7 +171,7 @@ const parseMetadata = (metadata) => {
         } else 
         { row[DIM_BUFFER] = parseFloat(row[DIM_BUFFER]) - holidaysCount * 24 * 60;}
 
-        if (nowTime < row[DIM_TIME_START]){
+        if (nowTime < startTime {
          row[DIM_BUFFER] = 0;
         } else 
         { row[DIM_BUFFER] = row[DIM_BUFFER] }
