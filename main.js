@@ -152,12 +152,18 @@ const parseMetadata = (metadata) => {
          row[DIM_CURRENT_ACTIVITY_TIME] = parseFloat(row[DIM_CURRENT_ACTIVITY_TIME]) - holidaysCount * 24 * 60;
 
         // Adjust Buffer Time
-    
+       if ( nowTime >= absoluteProgressTime) {
+         holidaysCount = countNumberOfHolidaysBetween(
+         holidays,
+         absoluteProgressTime,
+         nowTime);
+       } else {
        holidaysCount = countNumberOfHolidaysBetween(
          holidays,
          nowTime,
          absoluteProgressTime
         );
+       }
          row[DIM_BUFFER] = parseFloat(row[DIM_BUFFER]) - holidaysCount * 24 * 60;
       });
 
