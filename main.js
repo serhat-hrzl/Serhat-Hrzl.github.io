@@ -134,7 +134,7 @@ const parseMetadata = (metadata) => {
         let holidaysCount = 0 ;
         let absoluteProgressTime = new Date(yyyymmddhhmmssToDate(row[DIM_ABSOLUTE_TIME]).setHours(0,0,0));
         let nowTime = new Date(yyyymmddhhmmssToDate(row[DIM_NOW_TIME]).setHours(0,0,0));
-        let startTime = new Date(yyyymmddhhmmssToDate(row[DIM_TIME_START]).setHours(0,0,0));
+       
         
         
         // Adjust Remainining Time
