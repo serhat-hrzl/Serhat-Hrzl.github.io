@@ -164,7 +164,7 @@ const parseMetadata = (metadata) => {
          absoluteProgressTime
         );
        }
-        if (DIM_COLOR == 'RED'){
+        if (row[DIM_COLOR] == 'RED'){
          row[DIM_BUFFER] = parseFloat(row[DIM_BUFFER]) + holidaysCount * 24 * 60;
         } else 
         { row[DIM_BUFFER] = parseFloat(row[DIM_BUFFER]) - holidaysCount * 24 * 60;}
