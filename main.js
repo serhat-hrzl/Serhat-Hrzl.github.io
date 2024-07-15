@@ -160,7 +160,7 @@ const parseMetadata = (metadata) => {
          holidays,
          nowTime,
          absoluteProgressTime
-        );
+        )};
         { row[DIM_BUFFER] = parseFloat(row[DIM_BUFFER]) - holidaysCount * 24 * 60};
       });
 
