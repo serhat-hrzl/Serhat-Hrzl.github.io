@@ -155,13 +155,13 @@ const parseMetadata = (metadata) => {
      //   if (nowTime <= row[DIM_TIME_START]) {
        //   row[DIM_BUFFER] = parseFloat(row[DIM_BUFFER]);
      //   } else {
-        holidaysCount = countNumberOfHolidaysBetween(
-          holidays,
-          nowTime,
-          absoluteProgressTime
-        );
-        row[DIM_BUFFER] = parseFloat(row[DIM_BUFFER]) - holidaysCount * 24 * 60;
-      });
+      //  holidaysCount = countNumberOfHolidaysBetween(
+        //  holidays,
+        //  nowTime,
+        //  absoluteProgressTime
+       // );
+       // row[DIM_BUFFER] = parseFloat(row[DIM_BUFFER]) - holidaysCount * 24 * 60;
+     // });
 
       /*-------------------------------------Chart related customizations---------------------------------------*/
 
