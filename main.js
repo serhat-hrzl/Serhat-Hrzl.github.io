@@ -151,7 +151,8 @@ const parseMetadata = (metadata) => {
             row[DIM_TIME_END]
           );
          }
-         row[DIM_CURRENT_ACTIVITY_TIME] = parseFloat(row[DIM_CURRENT_ACTIVITY_TIME]) - holidaysCount * 24 * 60;
+     //    row[DIM_CURRENT_ACTIVITY_TIME] = parseFloat(row[DIM_CURRENT_ACTIVITY_TIME]) - holidaysCount * 24 * 60;
+         row[DIM_CURRENT_ACTIVITY_TIME] = parseFloat(row[DIM_CURRENT_ACTIVITY_TIME]) - holidaysCount * 501;
 
         // Adjust Buffer Time
        if ( nowTime >= absoluteProgressTime) {
@@ -167,9 +168,9 @@ const parseMetadata = (metadata) => {
         );
        }
         if (row[DIM_COLOR] == 'RED'){
-         row[DIM_BUFFER] = parseFloat(row[DIM_BUFFER]) + holidaysCount * 24 * 60;
+         row[DIM_BUFFER] = parseFloat(row[DIM_BUFFER]) + holidaysCount * 501;
         } else 
-        { row[DIM_BUFFER] = parseFloat(row[DIM_BUFFER]) - holidaysCount * 24 * 60;}
+        { row[DIM_BUFFER] = parseFloat(row[DIM_BUFFER]) - holidaysCount * 501;}
 
         if (row[DIM_NOW_TIMESTAMP] < row[DIM_TIME_START]) {
          row[DIM_BUFFER] = 0;
