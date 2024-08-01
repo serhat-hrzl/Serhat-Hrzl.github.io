@@ -64,10 +64,10 @@ const parseMetadata = (metadata) => {
       var DIM_BUFFER = 8; // Buffer Time
       var DIM_COLOR = 9; // Status Color
       var DIM_NOW_TIMESTAMP = 10; // Now Time Stamp used for the Markline
-      var DIM_HOLIDAY_STRING = 11; // Holiday timestamp
-      var DIM_ABSOLUTE_TIME = 12; // Absolute Time (same as DIM_TIME_PROGRESS but without _TIMESTAMP)
-      var DIM_NOW_TIME = 13 ; // Now Time (same as DIM_NOW_TIMESTAMP but without _TIMESTAMP)
-      var DIM_STATUS_CODE = 14; // Status code
+      var DIM_HOLIDAY_STRING = 11; // Holiday timestamp dm req id 1192006
+      var DIM_ABSOLUTE_TIME = 12; // Absolute Time (same as DIM_TIME_PROGRESS but without _TIMESTAMP) dm req id 1192006
+      var DIM_NOW_TIME = 13 ; // Now Time (same as DIM_NOW_TIMESTAMP but without _TIMESTAMP) dm req id 1192006
+      var DIM_STATUS_CODE = 14; // Status code dm req id 1192006
 
 
       var CHECK_NUMBER_OF_DAYS_FOR_WEEKENDS = 30;
@@ -137,7 +137,7 @@ const parseMetadata = (metadata) => {
        
         
         
-        // Adjust Remainining Time
+        // Adjust Remainining Time dm req id 1192006
          if (row[DIM_STATUS_CODE] === 401) {
           holidaysCount = countNumberOfHolidaysBetween(
             holidays,
@@ -151,7 +151,8 @@ const parseMetadata = (metadata) => {
             row[DIM_TIME_END]
           );
          }
-     //    row[DIM_CURRENT_ACTIVITY_TIME] = parseFloat(row[DIM_CURRENT_ACTIVITY_TIME]) - holidaysCount * 24 * 60;
+        // Working hours needs to be deducted from current activity actual working hrs are 8.21 hr i.e 501 min
+     //    row[DIM_CURRENT_ACTIVITY_TIME] = parseFloat(row[DIM_CURRENT_ACTIVITY_TIME]) - holidaysCount * 24 * 60; 
          row[DIM_CURRENT_ACTIVITY_TIME] = parseFloat(row[DIM_CURRENT_ACTIVITY_TIME]) - holidaysCount * 501;
 
         // Adjust Buffer Time
@@ -167,6 +168,7 @@ const parseMetadata = (metadata) => {
          absoluteProgressTime
         );
        }
+        // no of days with working hours needs to be deducted from buffer time
         if (row[DIM_COLOR] == 'RED'){
          row[DIM_BUFFER] = parseFloat(row[DIM_BUFFER]) + holidaysCount * 501;
         } else 
