@@ -236,7 +236,7 @@ const parseMetadata = (metadata) => {
                 children: [
                   {
                     type: "text",
-                    z: 150,
+                    z: 200,
                     left: "center",
                     top: "middle",
                     style: {
@@ -276,7 +276,7 @@ const parseMetadata = (metadata) => {
                 children: [
                   {
                     type: "text",
-                    z: 150,
+                    z: 200,
                     left: "center",
                     top: "middle",
                     style: {
@@ -316,7 +316,7 @@ const parseMetadata = (metadata) => {
                 children: [
                   {
                     type: "text",
-                    z: 150,
+                    z: 200,
                     left: "center",
                     top: "middle",
                     style: {
