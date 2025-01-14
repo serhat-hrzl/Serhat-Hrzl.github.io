@@ -12,7 +12,7 @@
     {
       "kind": "main",
       "tag": "com-zdp-gantt_chart",
-      "url": "https://serhat-hrzl.github.io/main.js",
+      "url": "/main.js",
       "integrity": "",
       "ignoreIntegrity": true
     }

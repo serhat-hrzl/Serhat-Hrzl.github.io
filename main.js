@@ -282,7 +282,7 @@ const parseMetadata = (metadata) => {
                     style: {
                       fill: "#696969",
                       font: "normal 16px Helvetica",
-                      width: 100,
+                      width: 110,
                       overflow: "break",
                       text: "Verleibende Auftragsdauer",
                     },
@@ -291,7 +291,7 @@ const parseMetadata = (metadata) => {
               },
               {
                 type: "group",
-                left: 330,
+                left: 340,
                 top: 60,
                 children: [
                   {
@@ -311,7 +311,7 @@ const parseMetadata = (metadata) => {
               },
               {
                 type: "group",
-                left: 350,
+                left: 360,
                 top: "50",
                 children: [
                   {
@@ -335,7 +335,7 @@ const parseMetadata = (metadata) => {
             show: true,
             top: 70,
             bottom: 70,
-            left: 470,
+            left: 500,
             right: 20,
             backgroundColor: "#fff",
             borderWidth: 0,
@@ -540,7 +540,7 @@ const parseMetadata = (metadata) => {
                 text: text,
                 textFill: "#fff",
                 fontFamily: "Helvetica",
-                fontSize: 16,
+                fontSize: 16, 
               }),
             },
           ],
@@ -560,7 +560,7 @@ const parseMetadata = (metadata) => {
             {
               type: "text",
               style: {
-                x: 50,
+                x: 60,
                 y: -3,
                 text: api.value(DIM_ORDER_NUMBER) + " ",
                 textVerticalAlign: "bottom",
@@ -571,18 +571,18 @@ const parseMetadata = (metadata) => {
             {
               type: "text",
               style: {
-                x: 250,
+                x: 260, 
                 y: -3,
                 text: api.value(DIM_CURRENT_ACTIVITY_TIME) + " mins",
                 textVerticalAlign: "bottom",
                 textAlign: "center",
                 font: "normal 16px Helvetica",
               },
-            },
+            },//Activity Time
             {
               type: "text",
               style: {
-                x: 375,
+                x: 395,
                 y: -3,
                 text: api.value(DIM_BUFFER) + " mins",
                 textVerticalAlign: "bottom",
