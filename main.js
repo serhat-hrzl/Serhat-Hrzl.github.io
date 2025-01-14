@@ -242,7 +242,7 @@ const parseMetadata = (metadata) => {
                     style: {
                       fill: "#696969",
                       width: 100,
-                      font: "normal 14px Helvetica",
+                      font: "normal 16px Helvetica",
                       overflow: "break",
                       text: "Auftrag",
                     },
@@ -281,7 +281,7 @@ const parseMetadata = (metadata) => {
                     top: "middle",
                     style: {
                       fill: "#696969",
-                      font: "normal 14px Helvetica",
+                      font: "normal 16px Helvetica",
                       width: 100,
                       overflow: "break",
                       text: "Verleibende Auftragsdauer",
@@ -321,7 +321,7 @@ const parseMetadata = (metadata) => {
                     top: "middle",
                     style: {
                       fill: "#696969",
-                      font: "normal 14px Helvetica",
+                      font: "normal 16px Helvetica",
                       width: 100,
                       overflow: "break",
                       text: "Puffer",
@@ -540,7 +540,7 @@ const parseMetadata = (metadata) => {
                 text: text,
                 textFill: "#fff",
                 fontFamily: "Helvetica",
-                fontSize: 14,
+                fontSize: 16,
               }),
             },
           ],
@@ -565,7 +565,7 @@ const parseMetadata = (metadata) => {
                 text: api.value(DIM_ORDER_NUMBER) + " ",
                 textVerticalAlign: "bottom",
                 textAlign: "left",
-                font: "bold 14px Helvetica",
+                font: "bold 16px Helvetica",
               },
             },
             {
@@ -576,7 +576,7 @@ const parseMetadata = (metadata) => {
                 text: api.value(DIM_CURRENT_ACTIVITY_TIME) + " mins",
                 textVerticalAlign: "bottom",
                 textAlign: "center",
-                font: "normal 14px Helvetica",
+                font: "normal 16px Helvetica",
               },
             },
             {
@@ -588,7 +588,7 @@ const parseMetadata = (metadata) => {
                 textVerticalAlign: "bottom",
                 textAlign: "center",
                 textFill: statusColor,
-                font: "normal 14px Helvetica",
+                font: "normal 16px Helvetica",
               },
             },
           ],
