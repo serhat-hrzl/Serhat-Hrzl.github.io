@@ -359,7 +359,7 @@ const parseMetadata = (metadata) => {
             },
             max: function (value) {
               let d = new Date();
-              d.setDate(d.getDate() + 5);
+              d.setDate(d.getDate() + 7);
               d.setHours(0, 0, 0, 0);
               return d;
             },
