@@ -72,7 +72,7 @@ const parseMetadata = (metadata) => {
 
       var CHECK_NUMBER_OF_DAYS_FOR_WEEKENDS = 30;
       var MAXIMUM_VALUE_SPAN = 15;
-      var NUMBER_OF_SPLITS = 8;
+      var NUMBER_OF_SPLITS = 12;
 
       const dataBinding = this.dataBinding;
       if (!dataBinding || dataBinding.state !== "success") {
