@@ -68,6 +68,8 @@ const parseMetadata = (metadata) => {
       var DIM_ABSOLUTE_TIME = 12; // Absolute Time (same as DIM_TIME_PROGRESS but without _TIMESTAMP) dm req id 1192006
       var DIM_NOW_TIME = 13 ; // Now Time (same as DIM_NOW_TIMESTAMP but without _TIMESTAMP) dm req id 1192006
       var DIM_STATUS_CODE = 14; // Status code dm req id 1192006
+      var DIM_RESOURCE = 15; // Resource - will be displayed after WorkCenter in the progress bar
+      var DIM_MATERIAL_DESCRIPTION = 16; // Material Description - will be displayed between Order and Remaining Time
 
 
       var CHECK_NUMBER_OF_DAYS_FOR_WEEKENDS = 30;
@@ -217,7 +219,7 @@ const parseMetadata = (metadata) => {
               zoomLock: true,
               width: 10,
               right: 10,
-              top: 70,
+              top: 95,
               bottom: 20,
               handleSize: 0,
               showDetail: false,
@@ -231,17 +233,16 @@ const parseMetadata = (metadata) => {
             elements: [
               {
                 type: "group",
-                left: 120,
-                top: "50",
+                left: 0,
+                top: 50,
                 children: [
                   {
                     type: "text",
                     z: 200,
-                    left: "center",
-                    top: "middle",
                     style: {
                       fill: "#696969",
-                      width: 100,
+                      width: 150,
+                      align: "center",
                       font: "normal 16px Helvetica",
                       overflow: "break",
                       text: "Auftrag",
@@ -251,8 +252,48 @@ const parseMetadata = (metadata) => {
               },
               {
                 type: "group",
-                left: 205,
-                top: 60,
+                left: 150,
+                top: 95,
+                children: [
+                  {
+                    type: "rect",
+                    x: 0,
+                    shape: {
+                      x: 0,
+                      y: 0,
+                      width: 1,
+                      height: 100000,
+                    },
+                    style: {
+                      fill: "#000000",
+                    },
+                  },
+                ],
+              },
+              // Header for Material Description"
+              {
+                type: "group",
+                left: 150,
+                top: 50,
+                children: [
+                  {
+                    type: "text",
+                    z: 200,
+                    style: {
+                      fill: "#696969",
+                      width: 330,
+                      align: "center",
+                      font: "normal 16px Helvetica",
+                      overflow: "break",
+                      text: "Materialbeschreibung",
+                    },
+                  },
+                ],
+              },
+              {
+                type: "group",
+                left: 480,
+                top: 95,
                 children: [
                   {
                     type: "rect",
@@ -271,18 +312,17 @@ const parseMetadata = (metadata) => {
               },
               {
                 type: "group",
-                left: 225,
-                top: "50",
+                left: 480,
+                top: 50,
                 children: [
                   {
                     type: "text",
                     z: 200,
-                    left: "center",
-                    top: "middle",
                     style: {
                       fill: "#696969",
                       font: "normal 16px Helvetica",
-                      width: 110,
+                      width: 140,
+                      align: "center",
                       overflow: "break",
                       text: "Verleibende Auftragsdauer",
                     },
@@ -291,8 +331,8 @@ const parseMetadata = (metadata) => {
               },
               {
                 type: "group",
-                left: 340,
-                top: 60,
+                left: 620,
+                top: 95,
                 children: [
                   {
                     type: "rect",
@@ -311,18 +351,17 @@ const parseMetadata = (metadata) => {
               },
               {
                 type: "group",
-                left: 360,
-                top: "50",
+                left: 620,
+                top: 50,
                 children: [
                   {
                     type: "text",
                     z: 200,
-                    left: "center",
-                    top: "middle",
                     style: {
                       fill: "#696969",
                       font: "normal 16px Helvetica",
-                      width: 100,
+                      width: 160,
+                      align: "center",
                       overflow: "break",
                       text: "Puffer",
                     },
@@ -333,9 +372,9 @@ const parseMetadata = (metadata) => {
           },
           grid: {
             show: true,
-            top: 70,
+            top: 95,
             bottom: 70,
-            left: 500,
+            left: 790,
             right: 20,
             backgroundColor: "#fff",
             borderWidth: 0,
@@ -386,6 +425,7 @@ const parseMetadata = (metadata) => {
             axisLabel: {
               inside: false,
               align: "center",
+              margin: 27,
               formatter: "{dd}-{MMM}",
               fontSize: 16,
             },
@@ -417,6 +457,11 @@ const parseMetadata = (metadata) => {
                 null,
                 null,
                 null,
+                null,
+                null,
+                null,
+                { type: "ordinal" },
+                { type: "ordinal" },
               ],
               encode: {
                 x: [DIM_TIME_START, DIM_TIME_END],
@@ -483,7 +528,12 @@ const parseMetadata = (metadata) => {
         var barHeight = 30;
         var x = timestampStart[0];
         var y = timestampStart[1] - barHeight;
-        var barDescription = api.value(DIM_WORKCENTER).toString() + " ";
+        // Naming of the progress bar: Workcenter before resource with "/" in between
+        var barDescription =
+          api.value(DIM_WORKCENTER).toString() +
+          " / " +
+          api.value(DIM_RESOURCE).toString() +
+          " ";
         var barDescriptionWidth =
           echarts.format.getTextRect(barDescription).width;
         var text = barLength > barDescriptionWidth + 30 ? barDescription : "";
@@ -565,18 +615,30 @@ const parseMetadata = (metadata) => {
             {
               type: "text",
               style: {
-                x: 60,
+                x: 75,
                 y: -3,
                 text: api.value(DIM_ORDER_NUMBER) + " ",
                 textVerticalAlign: "bottom",
-                textAlign: "left",
+                textAlign: "center",
                 font: "bold 16px Helvetica",
+              },
+            },
+            // Material Description
+            {
+              type: "text",
+              style: {
+                x: 315,
+                y: -3,
+                text: api.value(DIM_MATERIAL_DESCRIPTION) + " ",
+                textVerticalAlign: "bottom",
+                textAlign: "center",
+                font: "normal 16px Helvetica",
               },
             },
             {
               type: "text",
               style: {
-                x: 260, 
+                x: 550, 
                 y: -3,
                 text: api.value(DIM_CURRENT_ACTIVITY_TIME) + " mins",
                 textVerticalAlign: "bottom",
@@ -587,7 +649,7 @@ const parseMetadata = (metadata) => {
             {
               type: "text",
               style: {
-                x: 395,
+                x: 700,
                 y: -3,
                 text: api.value(DIM_BUFFER) + " mins",
                 textVerticalAlign: "bottom",
